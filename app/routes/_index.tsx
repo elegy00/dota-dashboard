@@ -1,4 +1,5 @@
 import type { V2_MetaFunction } from "@remix-run/node";
+import { Link } from "@remix-run/react";
 
 export const meta: V2_MetaFunction = () => {
   return [{ title: "New Remix App" }];
@@ -10,13 +11,7 @@ export default function Index() {
       <h1>Welcome to Remix</h1>
       <ul>
         <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/blog"
-            rel="noreferrer"
-          >
-            15m Quickstart Blog Tutorial
-          </a>
+          <Link to="/tournament">Tournament</Link>
         </li>
         <li>
           <a

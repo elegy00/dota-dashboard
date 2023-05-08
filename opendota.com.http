@@ -1,0 +1,38 @@
+
+### Get test match
+GET https://api.opendota.com/api/matches/7121026666
+
+
+### Get test match from achere league & lobby
+GET https://api.opendota.com/api/matches/7142274878
+
+
+
+### Get test local lobby vs botsmatch
+GET https://api.opendota.com/api/matches/7126908089
+
+### Get test EU West lobby vs botsmatch
+GET https://api.opendota.com/api/matches/7128166988
+
+### Get public PW EU West lobby vs botsmatch
+GET https://api.opendota.com/api/matches/7128296916
+
+
+### ID
+7128166988
+
+### GET Player
+GET https://api.opendota.com/api/players/54800020/recentMatches
+
+
+
+### Get test match
+POST https://api.opendota.com/api/request/7126908089
+
+### Send Match Replay
+POST https://api.opendota.com/api/request/7126908089
+
+< C:\Program Files (x86)\Steam\steamapps\common\dota 2 beta\game\dota\replays\auto-20230426-2206-start-Elegy.dem
+
+### Get replays
+https://api.opendota.com/api/replays/7126908089

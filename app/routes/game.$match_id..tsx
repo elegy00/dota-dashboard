@@ -5,7 +5,7 @@ import type { Match } from "~/types/opendota";
 import gamemode from "dotaconstants/json/game_mode.json";
 
 export const loader = async ({ params }: LoaderArgs) => {
-  const apiUrl = `https://api.opendota.com/api/matches/${params.slug}`;
+  const apiUrl = `https://api.opendota.com/api/matches/${params.match_id}`;
   const res = await fetch(apiUrl);
 
   const data = (await res.json()) as Match;

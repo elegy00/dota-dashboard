@@ -24,6 +24,7 @@ export default function Tournament() {
       <h1>Tournament</h1>
 
       <Link to="/game/7142274878">Game 7142274878</Link>
+      <Link to="/tournament/add">Create tournament</Link>
 
       {posts.map((p) => (
         <div key={p.slug}>{p.title}</div>

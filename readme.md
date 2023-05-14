@@ -39,3 +39,9 @@ npm run deploy
 You can run `flyctl info` to get the url and ip address of your server.
 
 Check out the [fly docs](https://fly.io/docs/getting-started/node/) for more information.
+
+### QuickFixes:
+
+### TypeError: (0 , import_jsx_dev_runtime.jsxDEV) is not a function
+
+stop the `npm run dev`, run `npm run build` and then rerun `npm run dev`

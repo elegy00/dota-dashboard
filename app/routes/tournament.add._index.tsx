@@ -1,7 +1,7 @@
 import { ActionArgs, json, redirect } from "@remix-run/node";
 import { Form, useLoaderData } from "@remix-run/react";
-import { MongoClient } from "mongodb";
-// import { MongoClient } from "./../util/mongodb.server";
+import { MongoClient } from "./../util/mongodb.server";
+import { v4 as uuidv4 } from "uuid";
 
 const uri = process.env.DB_CONNECTION ?? "";
 
@@ -10,7 +10,6 @@ interface CreateTournamentForm {
 }
 
 export async function action({ request }: ActionArgs) {
-  console.log("asdf");
   const body = await request.formData();
   try {
     const client = new MongoClient(uri);
@@ -18,7 +17,8 @@ export async function action({ request }: ActionArgs) {
     // console.log({ bodyOb });
     const database = client.db("test-1");
     const tournaments = database.collection("tournaments");
-    tournaments.insertOne({ name: bodyOb.name, games: [] });
+    await tournaments.insertOne({ name: bodyOb.name, games: [] });
+    console.log(await tournaments.find().toArray());
   } catch (e) {
     console.log(e);
   }

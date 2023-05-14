@@ -13,20 +13,6 @@ export default function Index() {
         <li>
           <Link to="/tournament">Tournament</Link>
         </li>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/jokes"
-            rel="noreferrer"
-          >
-            Deep Dive Jokes App Tutorial
-          </a>
-        </li>
-        <li>
-          <a target="_blank" href="https://remix.run/docs" rel="noreferrer">
-            Remix Docs
-          </a>
-        </li>
       </ul>
     </div>
   );

@@ -26,6 +26,7 @@ jobs:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
         with:
           args: "deploy --build-arg COMMIT_SHA=${{ github.sha }}"
+
       # This step sets the secret
       - name: Configure deployment secrets
         uses: superfly/flyctl-actions@master

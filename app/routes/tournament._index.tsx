@@ -1,42 +1,60 @@
+import type { ActionArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
-import { MongoClient } from "~/util/mongodb.server";
-// import { MongoClient } from "mongodb";
-// import { MongoClient } from "mongodb";
+import { ObjectId, WithId } from "mongodb";
+import { useCallback, useState } from "react";
+import { TournamentService } from "~/services";
+import type { Tournament } from "~/types/tournament";
 
 export const loader = async () => {
-  const uri = process.env.DB_CONNECTION ?? "";
-  console.log("asdf", uri);
-
-  const client = new MongoClient(uri);
-  // console.log({ bodyOb });
-  const database = client.db("test-1");
-  const tournColl = database.collection<{
-    name: string;
-    // id: string;
-  }>("tournaments");
-  var tournaments = await tournColl.find().toArray();
-
+  var tournaments = await TournamentService.getAllTournaments();
   return json({
     tournaments,
   });
 };
 
-export default function Tournament() {
-  const { tournaments } = useLoaderData<typeof loader>();
+export async function action({ request }: ActionArgs) {
+  // const body = await request.formData();
+  const bodyOb = (await request.json()) as { id: string };
+  // TournamentService.addTournament({ name: bodyOb.name });
+  console.log(bodyOb);
+  TournamentService.deleteTournament(bodyOb.id);
+  // return redirect("/tournament");
+  return null;
+}
 
-  console.log({ tournaments });
+export default function TournamentIndex() {
+  const { tournaments } = useLoaderData<typeof loader>();
+  const [removed, setRemoved] = useState<string[]>([]);
+
+  const deleteTournament = useCallback(
+    (t: { _id: string; name: string }) => async () => {
+      const res = confirm(`Delete ${t.name}?`);
+      if (res) {
+        const response = await fetch(`/tournament`, {
+          method: "delete",
+          body: JSON.stringify({ id: t._id }),
+        });
+        response.status === 200 && setRemoved([...removed, t._id]);
+      }
+    },
+    [removed]
+  );
+
   return (
     <main>
       <h1>Tournament</h1>
 
       <Link to="/tournament/add">Create tournament</Link>
       <ul>
-        {tournaments.map((p) => (
-          <li key={p._id}>
-            <Link to={`/tournament/${p._id}`}>{p.name}</Link>
-          </li>
-        ))}
+        {tournaments
+          .filter((t) => !removed.includes(t._id))
+          .map((p) => (
+            <li key={p._id}>
+              <Link to={`/tournament/${p._id}`}>{p.name}</Link>
+              <button onClick={deleteTournament(p)}>DELETE</button>
+            </li>
+          ))}
       </ul>
     </main>
   );

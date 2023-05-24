@@ -1,24 +1,35 @@
-import type { LoaderArgs } from "@remix-run/node";
+import { ActionArgs, LoaderArgs, redirect } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import type { Match } from "~/types/opendota";
 import gamemode from "dotaconstants/json/game_mode.json";
+import { TournamentService } from "~/services";
 
 export const loader = async ({ params }: LoaderArgs) => {
-  //   return json(data);
-  // return json({
-  //   posts: [
-  //     {
-  //       slug: "my-first-post",
-  //       title: "My First Post",
-  //     },
-  //     {
-  //       slug: "90s-mixtape",
-  //       title: "A Mixtape I Made Just For You",
-  //     },
-  //   ],
-  // });
+  console.log(params);
+  // var tournaments = await TournamentService.getTournamentById(
+  //   params["tournament_id"]
+  // );
+
+  return json({
+    // tournaments,
+  });
 };
+
+// export async function action({ request, context, params }: ActionArgs) {
+//   // const body = await request.formData();
+//   console.log(request);
+//   const tournamentId = params["tournament_id"];
+//   // if (request.method === "DELETE" && tournamentId) {
+//   //   TournamentService.deleteTournament(tournamentId);
+//   //   return 200;
+//   // }
+
+//   // const bodyOb = Object.fromEntries(body) as unknown as CreateTournamentForm;
+//   // TournamentService.addTournament({ name: bodyOb.name });
+
+//   // return redirect("/tournament");
+// }
 
 export default function Tournament() {
   const res = useLoaderData<typeof loader>();

@@ -1,9 +1,9 @@
 import type { ActionArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
-import { ObjectId, WithId } from "mongodb";
 import { useCallback, useState } from "react";
 import { TournamentService } from "~/services";
+import type { Dto } from "~/types/base";
 import type { Tournament } from "~/types/tournament";
 
 export const loader = async () => {
@@ -15,10 +15,9 @@ export const loader = async () => {
 
 export async function action({ request }: ActionArgs) {
   // const body = await request.formData();
-  const bodyOb = (await request.json()) as { id: string };
-  // TournamentService.addTournament({ name: bodyOb.name });
-  console.log(bodyOb);
-  TournamentService.deleteTournament(bodyOb.id);
+  const bodyOb = (await request.json()) as Dto<{}>;
+
+  TournamentService.deleteTournament(bodyOb._id);
   // return redirect("/tournament");
   return null;
 }
@@ -28,12 +27,13 @@ export default function TournamentIndex() {
   const [removed, setRemoved] = useState<string[]>([]);
 
   const deleteTournament = useCallback(
-    (t: { _id: string; name: string }) => async () => {
+    (t: Dto<Tournament>) => async () => {
       const res = confirm(`Delete ${t.name}?`);
+      const payload: Dto<{}> = { _id: t._id };
       if (res) {
         const response = await fetch(`/tournament`, {
           method: "delete",
-          body: JSON.stringify({ id: t._id }),
+          body: JSON.stringify(payload),
         });
         response.status === 200 && setRemoved([...removed, t._id]);
       }

@@ -5,7 +5,7 @@ import type { Tournament } from "~/types/tournament";
 
 type Props = Data<Dto<Tournament>[]>;
 
-const Tournaments: React.FC<Props> = (props) => {
+const TournamentsTemplate: React.FC<Props> = (props) => {
   const { data } = props;
   const [removed, setRemoved] = useState<string[]>([]);
 
@@ -43,4 +43,4 @@ const Tournaments: React.FC<Props> = (props) => {
   );
 };
 
-export { Tournaments };
+export { TournamentsTemplate };

@@ -5,22 +5,23 @@ import { TournamentService } from "~/services";
 
 export const loader = async ({ params }: LoaderArgs) => {
   var tournamentId = params["tournament_id"];
-  var matchId = params["match_id"];
+  var viewId = params["view_id"];
   if (tournamentId === undefined) throw new Error("tournament_id not defined");
-  if (matchId === undefined) throw new Error("matchId not defined");
+  if (viewId === undefined) throw new Error("viewId not defined");
 
   var tournament = await TournamentService.getTournamentById(tournamentId);
-  var match = tournament?.matches.find(
-    (m) => m.match_id === parseInt(matchId!)
-  );
+  // var match = tournament?.matches.find(
+  //   (m) => m.match_id === parseInt(matchId!)
+  // );
 
   return json({
-    match,
+    viewId,
+    // match,
   });
 };
 
-export default function MatchDetails() {
-  const { match } = useLoaderData<typeof loader>();
+export default function ViewDetails() {
+  const { viewId } = useLoaderData<typeof loader>();
 
-  return <div>{JSON.stringify(match)}</div>;
+  return <div>{`SOME VIEW ${viewId}`}</div>;
 }

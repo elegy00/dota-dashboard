@@ -1,5 +1,8 @@
-import { ActionArgs, LoaderArgs, json } from "@remix-run/node";
-import { Form, Link, useLoaderData } from "@remix-run/react";
+import type { ActionArgs, LoaderArgs } from "@remix-run/node";
+import { redirect } from "@remix-run/node";
+import { json } from "@remix-run/node";
+import { Outlet, useLoaderData } from "@remix-run/react";
+import { TournamentNav } from "~/components/templates/TournamentNav";
 import { TournamentService } from "~/services";
 import type { Match } from "~/types/opendota";
 
@@ -8,7 +11,6 @@ interface AddMatchForm {
 }
 
 export const loader = async ({ params }: LoaderArgs) => {
-  console.log(params);
   var id = params["tournament_id"];
   if (id === undefined) {
     throw new Error("tournament_id not defined");
@@ -43,50 +45,24 @@ export async function action({ request, params }: ActionArgs) {
   if (tournament === null) {
     throw new Error("tournament not defined");
   }
-  tournament?.matches.push(match);
+  if (!tournament.matches.some((m) => m.match_id === match.match_id)) {
+    tournament.matches.push(match);
+    TournamentService.updateTournament(tournament);
+  }
 
-  TournamentService.updateTournament(tournament);
-
-  return null;
+  return redirect(`./match/${match.match_id}`);
 }
 
-export default function Tournament() {
+const Tournament = () => {
   const { tournament } = useLoaderData<typeof loader>();
-  // console.log({
-  //   g1:
-  //     tournament?.matches && tournament.matches.length > 0
-  //       ? tournament.matches[0]
-  //       : null,
-  // });
+
   return (
     <main>
-      <h1>{`Tournament ${tournament?.name}`}</h1>
-
-      <h2>Add Match</h2>
-
-      <Form method="post">
-        <input type="number" name="id" />
-        {/* <input type="submit" t */}
-        <button>Create</button>
-      </Form>
-
-      <h2>Matches</h2>
-      <ul>
-        {tournament?.matches.map((match) => (
-          <li key={match.match_id}>
-            <Link to={`./match/${match.match_id}`}>
-              <span>{match.match_id}</span>
-              <span>:{new Date(match.start_time).toISOString()}</span>
-            </Link>
-            {/* <button onClick={deleteTournament(p)}>DELETE</button> */}
-          </li>
-        ))}
-      </ul>
-      {/* {tournament?.matches.map((match)=>)} */}
-      {/* <div>{gamemode[res.game_mode.toString()].name}</div> */}
-      {/* {posts.map((p) => (
-        <div key={p.slug}>{p.title}</div>
-      ))} */}
+      <aside>
+        <TournamentNav tournament={tournament} />
+      </aside>
+      <Outlet />
     </main>
   );
-}
+};
+export default Tournament;

@@ -1,4 +1,5 @@
-import { MongoClient, ObjectId, WithId } from "mongodb";
+import type { WithId } from "mongodb";
+import { MongoClient, ObjectId } from "mongodb";
 import type { Tournament } from "~/types/tournament";
 
 const getDatabaseConnection = () => {

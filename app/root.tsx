@@ -10,7 +10,15 @@ import {
 } from "@remix-run/react";
 
 export const links: LinksFunction = () => [
-  ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
+  ...(cssBundleHref
+    ? [
+        { rel: "stylesheet", href: cssBundleHref },
+        {
+          rel: "stylesheet",
+          href: "https://unpkg.com/modern-css-reset@1.4.0/dist/reset.min.css",
+        },
+      ]
+    : []),
 ];
 
 export default function App() {

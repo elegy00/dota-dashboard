@@ -22,5 +22,5 @@ export const loader = async ({ params }: LoaderArgs) => {
 export default function MatchDetails() {
   const { match } = useLoaderData<typeof loader>();
 
-  return <div>{JSON.stringify(match)}</div>;
+  return <div>{JSON.stringify(match, null, 2)}</div>;
 }

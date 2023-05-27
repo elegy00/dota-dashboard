@@ -21,6 +21,8 @@ const TournamentNav: React.FC<Props> = (props) => {
         <button>Add</button>
       </Form>
 
+
+      {/*
       <h2>Views</h2>
       <ul>
         {[1, 2].map((view) => (
@@ -30,7 +32,7 @@ const TournamentNav: React.FC<Props> = (props) => {
             </Link>
           </li>
         ))}
-      </ul>
+      </ul> */}
 
       <h2>Matches</h2>
       <ul>

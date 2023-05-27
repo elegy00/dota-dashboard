@@ -1,4 +1,6 @@
+import type { Match } from "./opendota";
+
 export interface Tournament {
   name: string;
-  id: string;
+  matches: Match[];
 }

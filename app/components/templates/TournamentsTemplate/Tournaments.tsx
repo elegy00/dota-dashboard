@@ -7,7 +7,7 @@ type Props = Data<Dto<Tournament>[]>;
 
 const TournamentsTemplate: React.FC<Props> = (props) => {
   const { data } = props;
-  const [removed, setRemoved] = useState<string[]>([]);
+  const [currentData, setCurrentData] = useState(data);
 
   const deleteTournament = useCallback(
     (t: Dto<Tournament>) => async () => {
@@ -18,10 +18,17 @@ const TournamentsTemplate: React.FC<Props> = (props) => {
           method: "delete",
           body: JSON.stringify(payload),
         });
-        response.status === 200 && setRemoved([...removed, t._id]);
+
+        const index = currentData.indexOf(t);
+        const updated = [...currentData];
+        console.log({ index });
+        if (index !== -1) {
+          updated.splice(index, 1);
+        }
+        response.status === 200 && setCurrentData(updated);
       }
     },
-    [removed]
+    [currentData]
   );
 
   return (
@@ -30,14 +37,12 @@ const TournamentsTemplate: React.FC<Props> = (props) => {
 
       <Link to="/tournament/add">Create tournament</Link>
       <ul>
-        {data
-          .filter((t) => !removed.includes(t._id))
-          .map((p) => (
-            <li key={p._id}>
-              <Link to={`/tournament/${p._id}`}>{p.name}</Link>
-              <button onClick={deleteTournament(p)}>DELETE</button>
-            </li>
-          ))}
+        {data.map((p) => (
+          <li key={p._id}>
+            <Link to={`/tournament/${p._id}`}>{p.name}</Link>
+            <button onClick={deleteTournament(p)}>DELETE</button>
+          </li>
+        ))}
       </ul>
     </main>
   );

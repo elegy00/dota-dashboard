@@ -39,7 +39,7 @@ export default function Tournament() {
   return (
     <main>
       <h1>Game which is cool</h1>
-      <div>{gamemode[res.game_mode.toString()].name}</div>
+      {/* <div>{gamemode[res.game_mode.toString()].name}</div> */}
       {/* {posts.map((p) => (
         <div key={p.slug}>{p.title}</div>
       ))} */}

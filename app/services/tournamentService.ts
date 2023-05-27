@@ -1,4 +1,4 @@
-import { MongoClient, ObjectId } from "mongodb";
+import { MongoClient, ObjectId, WithId } from "mongodb";
 import type { Tournament } from "~/types/tournament";
 
 const getDatabaseConnection = () => {
@@ -23,6 +23,10 @@ const TournamentService = {
 
   addTournament: async (tournament: Tournament) => {
     await tournaments.insertOne(tournament);
+  },
+
+  updateTournament: async (tournament: WithId<Tournament>) => {
+    await tournaments.replaceOne({ _id: tournament._id }, tournament);
   },
 
   deleteTournament: async (id: string) => {

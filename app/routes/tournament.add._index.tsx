@@ -10,7 +10,7 @@ interface CreateTournamentForm {
 export async function action({ request }: ActionArgs) {
   const body = await request.formData();
   const bodyOb = Object.fromEntries(body) as unknown as CreateTournamentForm;
-  TournamentService.addTournament({ name: bodyOb.name });
+  TournamentService.addTournament({ name: bodyOb.name, matches: [] });
 
   return redirect("/tournament");
 }

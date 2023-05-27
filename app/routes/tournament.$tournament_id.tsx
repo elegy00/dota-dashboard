@@ -52,7 +52,12 @@ export async function action({ request, params }: ActionArgs) {
 
 export default function Tournament() {
   const { tournament } = useLoaderData<typeof loader>();
-
+  // console.log({
+  //   g1:
+  //     tournament?.matches && tournament.matches.length > 0
+  //       ? tournament.matches[0]
+  //       : null,
+  // });
   return (
     <main>
       <h1>{`Tournament ${tournament?.name}`}</h1>
@@ -69,7 +74,7 @@ export default function Tournament() {
       <ul>
         {tournament?.matches.map((match) => (
           <li key={match.match_id}>
-            <Link to={`./${match.match_id}`}>
+            <Link to={`./match/${match.match_id}`}>
               <span>{match.match_id}</span>
               <span>:{new Date(match.start_time).toISOString()}</span>
             </Link>

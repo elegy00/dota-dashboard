@@ -10,7 +10,14 @@ const useColorThemeState = () => {
     const storedTheme = localStorage.getItem(
       local_storage_theme_key
     ) as ColorTheme;
-    storedTheme && setColorTheme(storedTheme);
+    if (storedTheme) {
+      setColorTheme(storedTheme);
+    }
+    const prefersDarkMode = window.matchMedia("prefers-color-scheme: dark");
+    if (window.matchMedia("prefers-color-scheme: dark").matches) {
+      setColorTheme("dark");
+    }
+    console.log({ storedTheme, prefersDarkMode });
   }, []);
 
   const setColorThemeProper = useCallback((theme: ColorTheme) => {

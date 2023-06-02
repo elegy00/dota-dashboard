@@ -14,10 +14,9 @@ const useColorThemeState = () => {
       setColorTheme(storedTheme);
     }
     const prefersDarkMode = window.matchMedia("prefers-color-scheme: dark");
-    if (window.matchMedia("prefers-color-scheme: dark").matches) {
+    if (prefersDarkMode.matches) {
       setColorTheme("dark");
     }
-    console.log({ storedTheme, prefersDarkMode });
   }, []);
 
   const setColorThemeProper = useCallback((theme: ColorTheme) => {

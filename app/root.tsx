@@ -8,6 +8,7 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
+import { lightColors, themeClass } from "./styles/theme/colors.css";
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref
@@ -30,7 +31,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className={`${lightColors} ${themeClass}`}>
         <Outlet />
         <ScrollRestoration />
         <Scripts />

@@ -8,7 +8,8 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
-import { lightColors, themeClass } from "./styles/theme/colors.css";
+import { darkColors, lightColors, themeClass } from "./styles/theme/colors.css";
+import { ColorContext, useColorThemeState } from "./state/colorContext";
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref
@@ -23,6 +24,9 @@ export const links: LinksFunction = () => [
 ];
 
 export default function App() {
+  const contextState = useColorThemeState();
+
+  console.log({ contextState });
   return (
     <html lang="en">
       <head>
@@ -31,12 +35,18 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className={`${lightColors} ${themeClass}`}>
-        <Outlet />
-        <ScrollRestoration />
-        <Scripts />
-        <LiveReload />
-      </body>
+      <ColorContext.Provider value={contextState}>
+        <body
+          className={`${
+            contextState.theme === "light" ? lightColors : darkColors
+          } ${themeClass}`}
+        >
+          <Outlet />
+          <ScrollRestoration />
+          <Scripts />
+          <LiveReload />
+        </body>
+      </ColorContext.Provider>
     </html>
   );
 }

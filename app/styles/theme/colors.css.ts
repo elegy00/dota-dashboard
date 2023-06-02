@@ -1,8 +1,6 @@
 import {
-  assignVars,
   createTheme,
   createThemeContract,
-  createGlobalTheme,
   createVar,
   style,
 } from "@vanilla-extract/css";
@@ -32,7 +30,7 @@ export const colorContract = createThemeContract({
   },
 });
 
-export const grey100 = createVar();
+const grey100 = createVar();
 const grey300 = createVar();
 const grey500 = createVar();
 const grey700 = createVar();

@@ -30,6 +30,7 @@ export const main = style({
 export const root = style({
   color: theme.grey[900],
   fontSize: 16,
+  fontFamily: "'Noto Sans', sans-serif",
 });
 
 export const header = style({

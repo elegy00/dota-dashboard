@@ -8,13 +8,13 @@ export const root = style({
   background: theme.grey[100],
   color: theme.grey[900],
   fontSize: 16,
-  padding: sizes["04"],
+  padding: sizes.s04,
   "@media": {
     [breakpoints.sm]: {
-      padding: [sizes["06"]],
+      padding: [sizes.s06],
     },
     [breakpoints.lg]: {
-      padding: [sizes["08"]],
+      padding: [sizes.s08],
     },
   },
 });

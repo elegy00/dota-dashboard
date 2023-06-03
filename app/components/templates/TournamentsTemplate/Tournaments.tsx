@@ -1,5 +1,6 @@
 import { Link } from "@remix-run/react";
 import { useCallback, useState } from "react";
+import { Button } from "~/components/atoms/Button";
 import type { Data, Dto } from "~/types/base";
 import type { Tournament } from "~/types/tournament";
 
@@ -40,7 +41,9 @@ const TournamentsTemplate: React.FC<Props> = (props) => {
         {data.map((p) => (
           <li key={p._id}>
             <Link to={`/tournament/${p._id}`}>{p.name}</Link>
-            <button onClick={deleteTournament(p)}>DELETE</button>
+            <Button variant="secondary" onClick={deleteTournament(p)}>
+              DELETE
+            </Button>
           </li>
         ))}
       </ul>

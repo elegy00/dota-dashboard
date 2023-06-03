@@ -10,12 +10,14 @@ interface Props extends Styleable, HTMLAttributes<HTMLButtonElement> {
 
 export const Button = forwardRef<HTMLButtonElement, PropsWithChildren<Props>>(
   (props, ref) => {
-    const { variant = "secondary" } = props;
+    const { variant = "secondary", className } = props;
     return (
       <button
         {...props}
         ref={ref}
-        className={[styles.root, styles.colorVariant[variant]].join(" ")}
+        className={[styles.root, styles.colorVariant[variant], className].join(
+          " "
+        )}
       />
     );
   }

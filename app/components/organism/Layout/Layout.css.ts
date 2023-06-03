@@ -4,7 +4,6 @@ import { theme } from "~/styles/theme/colors.css";
 import { sizes } from "~/styles/theme/sizes.css";
 
 export const root = style({
-  background: theme.grey[100],
   color: theme.grey[900],
   fontSize: 16,
   padding: sizes.s04,
@@ -16,4 +15,9 @@ export const root = style({
       padding: [sizes.s08],
     },
   },
+});
+
+export const header = style({
+  display: "flex",
+  justifyContent: "flex-end",
 });

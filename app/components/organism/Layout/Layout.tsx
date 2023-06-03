@@ -7,7 +7,7 @@ const Layout: React.FC<PropsWithChildren<unknown>> = (props) => {
   const { children } = props;
   return (
     <div className={styles.root}>
-      <header>
+      <header className={styles.header}>
         <nav></nav>
         <ColorModeButton />
       </header>

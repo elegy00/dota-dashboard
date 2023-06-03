@@ -8,7 +8,12 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
-import { darkColors, lightColors, themeClass } from "./styles/theme/colors.css";
+import {
+  darkColors,
+  lightColors,
+  theme,
+  themeClass,
+} from "./styles/theme/colors.css";
 import { ColorContext, useColorThemeState } from "./state/colorContext";
 import { Layout } from "./components/organism/Layout";
 
@@ -40,6 +45,7 @@ export default function App() {
           className={`${
             contextState.theme === "light" ? lightColors : darkColors
           } ${themeClass} `}
+          style={{ backgroundColor: theme.grey[100] }}
         >
           <Layout>
             <Outlet />

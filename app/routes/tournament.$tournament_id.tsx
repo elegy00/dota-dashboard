@@ -5,7 +5,6 @@ import { Outlet, useLoaderData } from "@remix-run/react";
 import { TournamentNav } from "~/components/templates/TournamentNav";
 import { TournamentService } from "~/services";
 import type { Match } from "~/types/opendota";
-import * as styles from "../styles/tournament.css";
 
 interface AddMatchForm {
   id: string;
@@ -58,7 +57,7 @@ const Tournament = () => {
   const { tournament } = useLoaderData<typeof loader>();
 
   return (
-    <main className={styles.root}>
+    <main>
       <aside>
         <TournamentNav tournament={tournament} />
       </aside>

@@ -39,7 +39,7 @@ export default function App() {
         <body
           className={`${
             contextState.theme === "light" ? lightColors : darkColors
-          } ${themeClass}`}
+          } ${themeClass} `}
         >
           <Layout>
             <Outlet />

@@ -1,1 +1,1 @@
-export * from "./Tournaments";
+export { TournamentsTemplate } from "./Tournaments";

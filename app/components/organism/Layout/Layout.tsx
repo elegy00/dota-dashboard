@@ -11,7 +11,7 @@ const Layout: React.FC<PropsWithChildren<unknown>> = (props) => {
         <nav></nav>
         <ColorModeButton />
       </header>
-      <main>{children}</main>
+      <main className={styles.main}>{children}</main>
     </div>
   );
 };

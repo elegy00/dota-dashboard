@@ -10,6 +10,7 @@ import {
 } from "@remix-run/react";
 import { darkColors, lightColors, themeClass } from "./styles/theme/colors.css";
 import { ColorContext, useColorThemeState } from "./state/colorContext";
+import { Layout } from "./components/organism/Layout";
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref
@@ -26,7 +27,6 @@ export const links: LinksFunction = () => [
 export default function App() {
   const contextState = useColorThemeState();
 
-  console.log({ contextState });
   return (
     <html lang="en">
       <head>
@@ -41,10 +41,12 @@ export default function App() {
             contextState.theme === "light" ? lightColors : darkColors
           } ${themeClass}`}
         >
-          <Outlet />
-          <ScrollRestoration />
-          <Scripts />
-          <LiveReload />
+          <Layout>
+            <Outlet />
+            <ScrollRestoration />
+            <Scripts />
+            <LiveReload />
+          </Layout>
         </body>
       </ColorContext.Provider>
     </html>

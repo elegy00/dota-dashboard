@@ -6,8 +6,6 @@ import { TournamentNav } from "~/components/templates/TournamentNav";
 import { TournamentService } from "~/services";
 import type { Match } from "~/types/opendota";
 import * as styles from "../styles/tournament.css";
-import { ColorContext } from "~/state/colorContext";
-import { useContext } from "react";
 
 interface AddMatchForm {
   id: string;
@@ -58,14 +56,10 @@ export async function action({ request, params }: ActionArgs) {
 
 const Tournament = () => {
   const { tournament } = useLoaderData<typeof loader>();
-  const { setTheme, theme } = useContext(ColorContext);
 
   return (
     <main className={styles.root}>
       <aside>
-        <button onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
-          {theme}
-        </button>
         <TournamentNav tournament={tournament} />
       </aside>
       <Outlet />

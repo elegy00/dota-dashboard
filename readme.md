@@ -1,6 +1,6 @@
-# Welcome to Remix!
+# Dota Dashboard!
 
-- [Remix Docs](https://remix.run/docs)
+Is built with [Remix.Run](https://remix.run/docs)
 
 ## Fly Setup
 

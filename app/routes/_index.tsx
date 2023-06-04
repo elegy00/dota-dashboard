@@ -8,7 +8,7 @@ export const meta: V2_MetaFunction = () => {
 export default function Index() {
   return (
     <div>
-      <h1>Welcome to Remix</h1>
+      <h1>Welcome to the dota dashboard</h1>
       <ul>
         <li>
           <Link to="/tournament">Tournament</Link>

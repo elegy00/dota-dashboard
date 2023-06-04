@@ -13,7 +13,7 @@ const useColorThemeState = () => {
     if (storedTheme) {
       setColorTheme(storedTheme);
     }
-    const prefersDarkMode = window.matchMedia("prefers-color-scheme: dark");
+    const prefersDarkMode = window.matchMedia("(prefers-color-scheme: dark)");
     if (prefersDarkMode.matches) {
       setColorTheme("dark");
     }

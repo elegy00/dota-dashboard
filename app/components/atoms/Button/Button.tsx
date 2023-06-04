@@ -1,7 +1,7 @@
 import type { HTMLAttributes, PropsWithChildren } from "react";
 import { forwardRef } from "react";
 import type { Styleable } from "~/types/styleable";
-import * as styles from "./Button.css";
+// import * as styles from "./Button.css";
 import type { ButtonVariant } from "./types";
 
 interface Props extends Styleable, HTMLAttributes<HTMLButtonElement> {
@@ -15,9 +15,8 @@ export const Button = forwardRef<HTMLButtonElement, PropsWithChildren<Props>>(
       <button
         {...props}
         ref={ref}
-        className={[styles.root, styles.colorVariant[variant], className].join(
-          " "
-        )}
+        // styles.root, styles.colorVariant[variant],
+        className={[className].join(" ")}
       />
     );
   }

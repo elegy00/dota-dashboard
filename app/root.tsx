@@ -8,19 +8,22 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
-import {
-  darkColors,
-  lightColors,
-  theme,
-  themeClass,
-} from "./styles/theme/colors.css";
+// import {
+//   darkColors,
+//   lightColors,
+//   theme,
+//   themeClass,
+// } from "./styles/theme/colors.css";
 import { ColorContext, useColorThemeState } from "./state/colorContext";
 import { Layout } from "./components/organism/Layout";
+
+import styles from "./tailwind.css";
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref
     ? [
         { rel: "stylesheet", href: cssBundleHref },
+        { rel: "stylesheet", href: styles },
         {
           rel: "stylesheet",
           href: "https://unpkg.com/modern-css-reset@1.4.0/dist/reset.min.css",
@@ -46,10 +49,10 @@ export default function App() {
       </head>
       <ColorContext.Provider value={contextState}>
         <body
-          className={`${
-            contextState.theme === "light" ? lightColors : darkColors
-          } ${themeClass} `}
-          style={{ backgroundColor: theme.grey[100] }}
+        // className={`${
+        //   contextState.theme === "light" ? lightColors : darkColors
+        // } ${themeClass} `}
+        // style={{ backgroundColor: theme.grey[100] }}
         >
           <Layout>
             <Outlet />

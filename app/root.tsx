@@ -19,18 +19,7 @@ import { Layout } from "./components/organism/Layout";
 
 import styles from "./tailwind.css";
 
-export const links: LinksFunction = () => [
-  ...(cssBundleHref
-    ? [
-        { rel: "stylesheet", href: cssBundleHref },
-        { rel: "stylesheet", href: styles },
-        {
-          rel: "stylesheet",
-          href: "https://unpkg.com/modern-css-reset@1.4.0/dist/reset.min.css",
-        },
-      ]
-    : []),
-];
+export const links: LinksFunction = () => [{ rel: "stylesheet", href: styles }];
 
 export default function App() {
   const contextState = useColorThemeState();
@@ -49,10 +38,10 @@ export default function App() {
       </head>
       <ColorContext.Provider value={contextState}>
         <body
-        // className={`${
-        //   contextState.theme === "light" ? lightColors : darkColors
-        // } ${themeClass} `}
-        // style={{ backgroundColor: theme.grey[100] }}
+          className={`${
+            contextState.theme === "light" ? "light-mode" : "dark-mode"
+          } bg-grey-100 text-grey-900`}
+          // style={{ backgroundColor: theme.grey[100] }}
         >
           <Layout>
             <Outlet />

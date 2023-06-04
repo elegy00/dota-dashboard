@@ -1,6 +1,8 @@
 import { useCallback, useState } from "react";
 import { Button } from "~/components/atoms/Button";
+import { TrashIcon } from "~/components/atoms/Icons";
 import { Link } from "~/components/atoms/Link";
+import { sizes } from "~/styles/theme/sizes.css";
 import type { Data, Dto } from "~/types/base";
 import type { Tournament } from "~/types/tournament";
 
@@ -39,9 +41,14 @@ const TournamentsTemplate: React.FC<Props> = (props) => {
       <ul>
         {data.map((p) => (
           <li key={p._id}>
-            <Link to={`/tournament/${p._id}`}>{p.name}</Link>
+            <Link
+              to={`/tournament/${p._id}`}
+              style={{ marginRight: sizes.s02 }}
+            >
+              {p.name}
+            </Link>
             <Button variant="secondary" onClick={deleteTournament(p)}>
-              DELETE
+              <TrashIcon />
             </Button>
           </li>
         ))}

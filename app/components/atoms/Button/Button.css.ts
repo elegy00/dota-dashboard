@@ -18,9 +18,9 @@ export const colorVariant = styleVariants({
     ":focus": { borderColor: theme.green[700] },
   },
   secondary: {
-    borderColor: theme.purple[800],
-    color: theme.purple[900],
-    ":hover": { borderColor: theme.purple[700] },
-    ":focus": { borderColor: theme.purple[700] },
+    borderColor: theme.purple[600],
+    color: theme.purple[700],
+    ":hover": { borderColor: theme.purple[500] },
+    ":focus": { borderColor: theme.purple[500] },
   },
 });

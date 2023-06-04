@@ -1,6 +1,6 @@
-import { Link } from "@remix-run/react";
 import { useCallback, useState } from "react";
 import { Button } from "~/components/atoms/Button";
+import { Link } from "~/components/atoms/Link";
 import type { Data, Dto } from "~/types/base";
 import type { Tournament } from "~/types/tournament";
 
@@ -22,7 +22,6 @@ const TournamentsTemplate: React.FC<Props> = (props) => {
 
         const index = currentData.indexOf(t);
         const updated = [...currentData];
-        console.log({ index });
         if (index !== -1) {
           updated.splice(index, 1);
         }

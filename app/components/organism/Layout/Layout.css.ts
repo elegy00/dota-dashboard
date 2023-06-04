@@ -33,9 +33,15 @@ export const root = style({
   fontFamily: "'Noto Sans', sans-serif",
 });
 
+export const nav = style({
+  display: "flex",
+  alignContent: "center",
+});
+
 export const header = style({
   display: "flex",
   justifyContent: "space-between",
+  alignContent: "center",
   borderBottom: `1px solid ${theme.grey[200]}`,
   padding: `${sizes.s01} ${sizes.s04}`,
   "@media": {

@@ -32,8 +32,6 @@ const onTournamentAdd = async (
     TournamentService.updateTournament(tournament);
   }
   return match;
-
-  //   return redirect(`./match/${match.match_id}`);
 };
 
 export const TournamentActions = {

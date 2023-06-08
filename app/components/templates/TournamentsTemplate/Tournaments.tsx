@@ -1,6 +1,5 @@
 import { useCallback, useState } from "react";
 import { deleteTournament } from "~/actions/tournament.delete";
-// import { TournamentDeleteActions } from "~/actions/tournament.delete";
 import { Button } from "~/components/atoms/Button";
 import { Link } from "~/components/atoms/Link";
 import type { Data, Dto } from "~/types/base";

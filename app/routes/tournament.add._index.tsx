@@ -2,6 +2,7 @@ import type { ActionArgs } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { Form } from "@remix-run/react";
 import { Button } from "~/components/atoms/Button";
+import { Input } from "~/components/atoms/Input/Input";
 import { TournamentService } from "~/services";
 
 interface CreateTournamentForm {
@@ -22,7 +23,11 @@ export default function Tournament() {
       <h1>Add Tournament</h1>
 
       <Form method="post">
-        <input type="text" name="name" className="text-grey-800 bg-grey-200 rounded" />
+        <Input
+          type="text"
+          name="name"
+          className=""
+        />
         {/* <input type="submit" t */}
         <Button>Create</Button>
       </Form>

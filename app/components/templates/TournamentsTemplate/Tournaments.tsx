@@ -1,4 +1,6 @@
 import { useCallback, useState } from "react";
+import { deleteTournament } from "~/actions/tournament.delete";
+// import { TournamentDeleteActions } from "~/actions/tournament.delete";
 import { Button } from "~/components/atoms/Button";
 import { Link } from "~/components/atoms/Link";
 import type { Data, Dto } from "~/types/base";
@@ -10,14 +12,12 @@ const TournamentsTemplate: React.FC<Props> = (props) => {
   const { data } = props;
   const [currentData, setCurrentData] = useState(data);
 
-  const deleteTournament = useCallback(
+  const deleteT = useCallback(
     (t: Dto<Tournament>) => async () => {
       const res = confirm(`Delete ${t.name}?`);
-      const payload: Dto<{}> = { _id: t._id };
       if (res) {
-        const response = await fetch(`/tournament`, {
-          method: "delete",
-          body: JSON.stringify(payload),
+        const response = await deleteTournament({
+          id: t._id,
         });
 
         const index = currentData.indexOf(t);
@@ -40,7 +40,7 @@ const TournamentsTemplate: React.FC<Props> = (props) => {
         {data.map((p) => (
           <li key={p._id}>
             <Link to={`/tournament/${p._id}`}>{p.name}</Link>
-            <Button variant="secondary" onClick={deleteTournament(p)}>
+            <Button variant="secondary" onClick={deleteT(p)}>
               DELETE
             </Button>
           </li>

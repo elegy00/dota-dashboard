@@ -22,7 +22,7 @@ export default function Tournament() {
       <h1>Add Tournament</h1>
 
       <Form method="post">
-        <input type="text" name="name" />
+        <input type="text" name="name" className="text-grey-800 bg-grey-200 rounded" />
         {/* <input type="submit" t */}
         <Button>Create</Button>
       </Form>

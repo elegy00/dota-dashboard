@@ -18,12 +18,13 @@ const TournamentsTemplate: React.FC<Props> = (props) => {
         const response = await deleteTournament({
           id: t._id,
         });
+        const index = currentData.findIndex((d) => d._id === t._id);
 
-        const index = currentData.indexOf(t);
         const updated = [...currentData];
         if (index !== -1) {
           updated.splice(index, 1);
         }
+
         response.status === 200 && setCurrentData(updated);
       }
     },
@@ -32,12 +33,14 @@ const TournamentsTemplate: React.FC<Props> = (props) => {
 
   return (
     <main>
-      <h1>Tournament</h1>
+      <h1>Tournaments</h1>
 
-      <Link to="/tournament/add">Create tournament</Link>
-      <ul>
-        {data.map((p) => (
-          <li key={p._id}>
+      <Link to="/tournament/add" className="mt-4">
+        Create tournament
+      </Link>
+      <ul className="space-y-2">
+        {currentData.map((p) => (
+          <li key={p._id} className="space-x-2 flex justify-between max-w-lg">
             <Link to={`/tournament/${p._id}`}>{p.name}</Link>
             <Button variant="secondary" onClick={deleteT(p)}>
               DELETE

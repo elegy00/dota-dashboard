@@ -1,7 +1,7 @@
 import { TournamentService } from "~/services";
 
 const deleteTournament = async (body: DeleteBody) =>
-  fetch(`/tournament`, {
+  fetch(`/api/tournament`, {
     method: "delete",
     body: JSON.stringify(body),
   });
@@ -13,10 +13,6 @@ const onTournamentDelete = async (request: Request) => {
   }
 };
 
-// export const TournamentDeleteActions = {
-//   deleteTournament,
-//   onTournamentDelete,
-// };
 export { deleteTournament, onTournamentDelete };
 
 interface DeleteBody {

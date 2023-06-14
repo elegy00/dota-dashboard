@@ -1,10 +1,11 @@
-import type { ActionArgs, LoaderArgs } from "@remix-run/node";
+import type { ActionArgs, LoaderArgs, V2_MetaFunction } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Outlet, useLoaderData } from "@remix-run/react";
 import { TournamentNav } from "~/components/templates/TournamentNav";
 import { TournamentService } from "~/services";
 import type { Match } from "~/types/opendota";
+import { pageTitle } from "~/util/meta";
 
 interface AddMatchForm {
   id: string;
@@ -52,6 +53,10 @@ export async function action({ request, params }: ActionArgs) {
 
   return redirect(`./match/${match.match_id}`);
 }
+
+export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
+  return [{ title: pageTitle("tournament", data?.tournament?.name) }];
+};
 
 const Tournament = () => {
   const { tournament } = useLoaderData<typeof loader>();

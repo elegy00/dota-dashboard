@@ -1,8 +1,14 @@
+import type { V2_MetaFunction } from "@remix-run/react";
 import { useNavigate } from "@remix-run/react";
 import { useCallback } from "react";
 import { tournamentActionCaller } from "~/actions/tournament/tournament.index";
 import { TournamentForm } from "~/components/organism/TournamentForm/TournamentForm";
+import { pageTitle } from "~/util/meta";
 import type { TournamentFm } from "~/validation/tournamentSchema";
+
+export const meta: V2_MetaFunction = () => {
+  return [{ title: pageTitle("add tournament") }];
+};
 
 export default function Tournament() {
   const navigate = useNavigate();

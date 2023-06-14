@@ -1,8 +1,17 @@
 import type { ActionArgs } from "@remix-run/node"; // or cloudflare/deno
-import { onTournamentDelete } from "~/actions/tournament.delete";
+import { tournamentActionExecutor } from "~/actions/tournament/tournament.index";
+import type { ActionMethod } from "~/actions/types";
 
-export const action = async ({ request }: ActionArgs) => {
-  onTournamentDelete(request);
+export const action = async (args: ActionArgs) => {
+  const action = tournamentActionExecutor[args.request.method as ActionMethod];
+  if (action) {
+    return action(args);
+  } else {
+    throw new Error(
+      `Unhandled API call: ${args.request.method} ${args.request.url}`
+    );
+  }
+  // onTournamentDelete(request);
   // switch (request.method) {
   //   case "POST": {
   //     /* handle "POST" */
@@ -17,5 +26,5 @@ export const action = async ({ request }: ActionArgs) => {
   //     /* handle "DELETE" */
   //   }
   // }
-  return null;
+  // return null;
 };

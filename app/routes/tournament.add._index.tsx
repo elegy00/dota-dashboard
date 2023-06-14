@@ -22,12 +22,12 @@ export default function Tournament() {
     <main>
       <h1>Add Tournament</h1>
 
-      <Form method="post">
-        <Input
-          type="text"
-          name="name"
-          className=""
-        />
+      <Form
+        onSubmit={(ev) => {
+          ev.preventDefault();
+        }}
+      >
+        <Input type="text" name="name" className="" />
         {/* <input type="submit" t */}
         <Button>Create</Button>
       </Form>

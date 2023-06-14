@@ -1,13 +1,18 @@
-import type { Params } from "@remix-run/router";
+import type { ActionArgs } from "@remix-run/node";
 import { TournamentService } from "~/services";
 import type { Match } from "~/types/opendota";
+import type { ActionRoute } from "../types";
 
-const addTournament = () => {};
+const addTournament = (route: ActionRoute) => async (body: AddMatchForm) =>
+  fetch(route.path, {
+    method: route.method,
+    body: JSON.stringify(body),
+  });
 
-const onTournamentAdd = async (
-  request: Request,
-  params: Params
-): Promise<Match> => {
+const onTournamentAdded = async ({
+  request,
+  params,
+}: ActionArgs): Promise<Match> => {
   const body = await request.formData();
   var id = params["tournament_id"];
   if (id === undefined) {
@@ -34,10 +39,7 @@ const onTournamentAdd = async (
   return match;
 };
 
-export const TournamentActions = {
-  addTournament,
-  onTournamentAdd,
-};
+export { addTournament, onTournamentAdded as onTournamentAdd };
 
 interface AddMatchForm {
   id: string;

@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.light-mode {
+  --color-grey-100: #e2e2e2;
+  --color-grey-200: #c6c6c6;
+  --color-grey-300: #ababab;
+  --color-grey-400: #919191;
+  --color-grey-500: #777777;
+  --color-grey-600: #5e5e5e;
+  --color-grey-700: #474747;
+  --color-grey-800: #303030;
+  --color-grey-900: #1b1b1b;
+
+  --color-purple-100: #e4e1e4;
+  --color-purple-200: #cac5ca;
+  --color-purple-300: #b1a9b1;
+  --color-purple-400: #998d98;
+  --color-purple-500: #817380;
+  --color-purple-600: #6a5969;
+  --color-purple-700: #544153;
+  --color-purple-800: #3b2b3b;
+  --color-purple-900: #221921;
+
+  --color-violet-100: #e1e2e7;
+  --color-violet-200: #c4c6d0;
+  --color-violet-300: #a8abb9;
+  --color-violet-400: #8b90a3;
+  --color-violet-500: #70768e;
+  --color-violet-600: #555e7a;
+  --color-violet-700: #3d4661;
+  --color-violet-800: #293042;
+  --color-violet-900: #171b26;
+
+  --color-green-100: #c0f0ae;
+  --color-green-200: #95d77d;
+  --color-green-300: #81ba6c;
+  --color-green-400: #6d9d5b;
+  --color-green-500: #5a814b;
+  --color-green-600: #47663c;
+  --color-green-700: #354d2d;
+  --color-green-800: #24351f;
+  --color-green-900: #151e11;
+}
+
+.dark-mode {
+  --color-grey-100: #1b1b1b;
+  --color-grey-200: #303030;
+  --color-grey-300: #474747;
+  --color-grey-400: #5e5e5e;
+  --color-grey-500: #777777;
+  --color-grey-600: #919191;
+  --color-grey-700: #ababab;
+  --color-grey-800: #c6c6c6;
+  --color-grey-900: #e2e2e2;
+
+  --color-purple-100: #221921;
+  --color-purple-200: #3b2b3b;
+  --color-purple-300: #544153;
+  --color-purple-400: #6a5969;
+  --color-purple-500: #817380;
+  --color-purple-600: #aba2ab;
+  --color-purple-700: #b1a9b1;
+  --color-purple-800: #cac5ca;
+  --color-purple-900: #e4e1e4;
+
+  --color-violet-100: #171b26;
+  --color-violet-200: #293042;
+  --color-violet-300: #3d4661;
+  --color-violet-400: #555e7a;
+  --color-violet-500: #70768e;
+  --color-violet-600: #8b90a3;
+  --color-violet-700: #a8abb9;
+  --color-violet-800: #c4c6d0;
+  --color-violet-900: #e1e2e7;
+
+  --color-green-100: #151e11;
+  --color-green-200: #24351f;
+  --color-green-300: #354d2d;
+  --color-green-400: #47663c;
+  --color-green-500: #5a814b;
+  --color-green-600: #6d9d5b;
+  --color-green-700: #81ba6c;
+  --color-green-800: #95d77d;
+  --color-green-900: #c0f0ae;
+}

@@ -1,5 +1,6 @@
 import { Form } from "@remix-run/react";
 import { Button } from "~/components/atoms/Button";
+import { Input } from "~/components/atoms/Input/Input";
 import { Link } from "~/components/atoms/Link/Link";
 import type { Data, Dto } from "~/types/base";
 import type { Tournament } from "~/types/tournament";
@@ -18,7 +19,7 @@ const TournamentNav: React.FC<Props> = (props) => {
       <h2>Add Match</h2>
 
       <Form method="post">
-        <input type="number" name="id" />
+        <Input type="number" name="id" />
         {/* <input type="submit" t */}
         <Button variant="primary">Add</Button>
       </Form>

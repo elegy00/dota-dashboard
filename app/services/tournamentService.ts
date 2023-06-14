@@ -23,7 +23,7 @@ const TournamentService = {
   },
 
   addTournament: async (tournament: Tournament) => {
-    await tournaments.insertOne(tournament);
+    return await tournaments.insertOne(tournament);
   },
 
   updateTournament: async (tournament: WithId<Tournament>) => {

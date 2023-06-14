@@ -3,7 +3,7 @@ import { deleteTournament, onTournamentDelete } from "./tournament.delete";
 import type { ActionMethod } from "../types";
 import { addTournament, onTournamentAdd } from "./tournament.add";
 
-const path = "api/tournament";
+const path = "/api/tournament";
 
 export const tournamentActionCaller = {
   delete: deleteTournament({ method: "DELETE", path }),

@@ -19,15 +19,25 @@ const TournamentForm = ({ onSubmit }: Props) => {
     resolver: zodResolver(tournamentSchema),
   });
 
-  console.log({ errors });
-
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
       className="flex flex-col space-y-2 max-w-md"
     >
-      <Input {...register("name")} type="text" />
-      <TextArea {...register("description")} />
+      <div className="w-full">
+        <Input {...register("name")} type="text" className="w-full" />
+        {errors.name && (
+          <p className="text-xs text-grey-700 mt-0">{errors.name.message}</p>
+        )}
+      </div>
+      <div className="w-full">
+        <TextArea {...register("description")} className="w-full" />
+        {errors.description && (
+          <p className="text-xs text-grey-700 mt-0">
+            {errors.description.message}
+          </p>
+        )}
+      </div>
       <Button>Create</Button>
     </form>
   );

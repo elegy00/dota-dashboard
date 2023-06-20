@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { tournamentActionCaller } from "~/actions/tournament/tournament.index";
+import { tournamentsActionCaller } from "~/actions/tournaments/tournaments.index";
 import { Button } from "~/components/atoms/Button";
 import { Link } from "~/components/atoms/Link";
 import type { Data, Dto } from "~/types/base";
@@ -15,7 +15,7 @@ const TournamentsTemplate: React.FC<Props> = (props) => {
     (t: Dto<Tournament>) => async () => {
       const res = confirm(`Delete ${t.name}?`);
       if (res) {
-        const response = await tournamentActionCaller.delete({
+        const response = await tournamentsActionCaller.delete({
           id: t._id,
         });
         const index = currentData.findIndex((d) => d._id === t._id);

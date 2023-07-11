@@ -25,6 +25,21 @@ export const loader = async ({ params }: LoaderArgs) => {
   });
 };
 
+export const shouldRevalidate: ShouldRevalidateFunction = ({
+  actionResult,
+  currentParams,
+  currentUrl,
+  defaultShouldRevalidate,
+  formAction,
+  formData,
+  formEncType,
+  formMethod,
+  nextParams,
+  nextUrl,
+}) => {
+  return nextUrl.searchParams.get("added") === "true";
+};
+
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   return [{ title: pageTitle("tournament", data?.tournament?.name) }];
 };

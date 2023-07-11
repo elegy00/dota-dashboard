@@ -1,7 +1,7 @@
 import type { V2_MetaFunction } from "@remix-run/react";
 import { useNavigate } from "@remix-run/react";
 import { useCallback } from "react";
-import { tournamentActionCaller } from "~/actions/tournament/tournament.index";
+import { tournamentsActionCaller } from "~/actions/tournaments/tournaments.index";
 import { TournamentForm } from "~/components/organism/TournamentForm/TournamentForm";
 import { pageTitle } from "~/util/meta";
 import type { TournamentFm } from "~/validation/tournamentSchema";
@@ -15,7 +15,7 @@ export default function Tournament() {
 
   const onSubmit = useCallback(
     async (tournament: TournamentFm) => {
-      const res = await tournamentActionCaller.add(tournament);
+      const res = await tournamentsActionCaller.add(tournament);
       if (res.status === 200) {
         return navigate("/tournament");
       }

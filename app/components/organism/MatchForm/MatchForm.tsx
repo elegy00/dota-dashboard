@@ -3,20 +3,20 @@ import { useForm } from "react-hook-form";
 import { Button } from "~/components/atoms/Button";
 import { Input } from "~/components/atoms/Input/Input";
 import { TextArea } from "~/components/atoms/Input/TextArea";
-import type { TournamentFm } from "../../../validation/tournamentSchema";
-import { tournamentSchema } from "../../../validation/tournamentSchema";
+import type { MatchFm } from "~/validation/matchSchema";
+import { matchSchema } from "~/validation/matchSchema";
 
 interface Props {
-  onSubmit: (tournament: TournamentFm) => void;
+  onSubmit: (match: MatchFm) => void;
 }
 
-const TournamentForm = ({ onSubmit }: Props) => {
+const MatchForm = ({ onSubmit }: Props) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<TournamentFm>({
-    resolver: zodResolver(tournamentSchema),
+  } = useForm<MatchFm>({
+    resolver: zodResolver(matchSchema),
   });
 
   return (
@@ -25,9 +25,13 @@ const TournamentForm = ({ onSubmit }: Props) => {
       className="flex flex-col space-y-2 max-w-md"
     >
       <div className="w-full">
-        <Input {...register("name")} type="text" className="w-full" />
-        {errors.name && (
-          <p className="text-xs text-grey-700 mt-0">{errors.name.message}</p>
+        <Input
+          {...register("matchId", { valueAsNumber: true })}
+          type="number"
+          className="w-full"
+        />
+        {errors.matchId && (
+          <p className="text-xs text-grey-700 mt-0">{errors.matchId.message}</p>
         )}
       </div>
       <div className="w-full">
@@ -38,9 +42,9 @@ const TournamentForm = ({ onSubmit }: Props) => {
           </p>
         )}
       </div>
-      <Button>Create</Button>
+      <Button>Add</Button>
     </form>
   );
 };
 
-export { TournamentForm };
+export { MatchForm };

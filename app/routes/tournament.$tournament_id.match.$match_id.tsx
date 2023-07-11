@@ -20,7 +20,6 @@ export const loader = async ({ params }: LoaderArgs) => {
   var heroes = Object.values(heroesData)
     .filter((hd) => heroIds?.includes(hd.id))
     .map((hero) => {
-      // const hero = heroes.find((h) => h.id === p.hero_id);
       const hName = hero?.name.substring("npc_dota_hero_".length);
       return {
         ...hero,

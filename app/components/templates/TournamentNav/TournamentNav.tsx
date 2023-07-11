@@ -3,16 +3,14 @@ import { useCallback } from "react";
 import { matchActionCaller } from "~/actions/matches/match.index";
 import { Link } from "~/components/atoms/Link/Link";
 import { MatchForm } from "~/components/organism/MatchForm/MatchForm";
-import type { Data, Dto } from "~/types/base";
+import type { Dto } from "~/types/base";
 import type { Tournament } from "~/types/tournament";
 import type { MatchFm } from "~/validation/matchSchema";
 
-interface Props extends Data<Dto<Tournament>> {
+interface Props {
   matchId?: string;
   viewId?: string;
-  tournament?: Dto<Tournament>;
-
-  // onTournamentChanged?: (tournament: Dto<Tournament>) => void;
+  tournament: Dto<Tournament>;
 }
 
 const TournamentNav: React.FC<Props> = (props) => {

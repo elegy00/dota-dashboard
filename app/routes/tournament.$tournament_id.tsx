@@ -6,10 +6,6 @@ import { TournamentNav } from "~/components/templates/TournamentNav";
 import { TournamentService } from "~/services";
 import { pageTitle } from "~/util/meta";
 
-// interface AddMatchForm {
-//   id: string;
-// }
-
 export const loader = async ({ params }: LoaderArgs) => {
   var id = params["tournament_id"];
   if (id === undefined) {
@@ -25,18 +21,7 @@ export const loader = async ({ params }: LoaderArgs) => {
   });
 };
 
-export const shouldRevalidate: ShouldRevalidateFunction = ({
-  actionResult,
-  currentParams,
-  currentUrl,
-  defaultShouldRevalidate,
-  formAction,
-  formData,
-  formEncType,
-  formMethod,
-  nextParams,
-  nextUrl,
-}) => {
+export const shouldRevalidate: ShouldRevalidateFunction = ({ nextUrl }) => {
   return nextUrl.searchParams.get("added") === "true";
 };
 
@@ -49,9 +34,7 @@ const Tournament = () => {
 
   return (
     <main>
-      <aside>
-        <TournamentNav tournament={tournament} />
-      </aside>
+      <aside>{tournament && <TournamentNav tournament={tournament} />}</aside>
       <Outlet />
     </main>
   );

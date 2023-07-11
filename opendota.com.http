@@ -36,3 +36,7 @@ POST https://api.opendota.com/api/request/7126908089
 
 ### Get replays
 https://api.opendota.com/api/replays/7126908089
+
+
+### Get Heroes
+https://api.opendota.com/api/heroes

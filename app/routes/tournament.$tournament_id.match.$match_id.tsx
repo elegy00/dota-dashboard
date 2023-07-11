@@ -24,7 +24,7 @@ export const loader = async ({ params }: LoaderArgs) => {
       const hName = hero?.name.substring("npc_dota_hero_".length);
       return {
         ...hero,
-        imgPath: `http://cdn.dota2.com/apps/dota2/images/heroes/${hName}_full.png`,
+        imgPath: `https://cdn.dota2.com/apps/dota2/images/heroes/${hName}_full.png`,
       };
     });
 

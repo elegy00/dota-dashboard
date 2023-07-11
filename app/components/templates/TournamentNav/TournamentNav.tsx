@@ -1,40 +1,47 @@
-import { Form } from "@remix-run/react";
-import { Button } from "~/components/atoms/Button";
-import { Input } from "~/components/atoms/Input/Input";
+import { useNavigate } from "@remix-run/react";
+import { useCallback } from "react";
+import { matchActionCaller } from "~/actions/matches/match.index";
 import { Link } from "~/components/atoms/Link/Link";
+import { MatchForm } from "~/components/organism/MatchForm/MatchForm";
 import type { Data, Dto } from "~/types/base";
 import type { Tournament } from "~/types/tournament";
+import type { MatchFm } from "~/validation/matchSchema";
 
 interface Props extends Data<Dto<Tournament>> {
   matchId?: string;
   viewId?: string;
   tournament?: Dto<Tournament>;
+
+  // onTournamentChanged?: (tournament: Dto<Tournament>) => void;
 }
 
 const TournamentNav: React.FC<Props> = (props) => {
   const { tournament } = props;
+  const navigate = useNavigate();
+
+  const onSubmit = useCallback(
+    async (match: MatchFm) => {
+      if (!tournament) {
+        return;
+      }
+      const res = await matchActionCaller.add(match, {
+        tournamentId: tournament._id,
+      });
+
+      if (res.status === 200) {
+        const result = (await res.json()) as unknown as Dto<Tournament>;
+        console.log(result);
+        return navigate(`./match/${match.matchId}`);
+      }
+    },
+    [navigate, tournament]
+  );
 
   return (
     <>
       <h2>Add Match</h2>
 
-      <Form method="post">
-        <Input type="number" name="id" />
-        {/* <input type="submit" t */}
-        <Button variant="primary">Add</Button>
-      </Form>
-
-      {/*
-      <h2>Views</h2>
-      <ul>
-        {[1, 2].map((view) => (
-          <li key={view}>
-            <Link to={`./view/${view}`}>
-              <span>{view}</span>
-            </Link>
-          </li>
-        ))}
-      </ul> */}
+      <MatchForm onSubmit={onSubmit} />
 
       <h2>Matches</h2>
       <ul>

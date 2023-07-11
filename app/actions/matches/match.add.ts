@@ -43,13 +43,6 @@ const onMatchAdded = async ({
     TournamentService.updateTournament(tournament);
   }
   return { ...tournament, _id: tournament._id.toString() };
-
-  // const result = await TournamentService.addTournament({
-  //   name: tournament.name,
-  //   description: tournament.description,
-  //   matches: [],
-  // });
-  // return { ...tournament, _id: result.insertedId, matches: [] };
 };
 
 export { addMatch, onMatchAdded };

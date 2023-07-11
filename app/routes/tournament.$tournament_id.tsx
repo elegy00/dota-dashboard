@@ -22,7 +22,7 @@ export const loader = async ({ params }: LoaderArgs) => {
 };
 
 export const shouldRevalidate: ShouldRevalidateFunction = ({ nextUrl }) => {
-  return nextUrl.searchParams.get("added") === "true";
+  return nextUrl.searchParams.get("changed") === "true";
 };
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {

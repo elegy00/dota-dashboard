@@ -2,11 +2,12 @@ import { useCallback, useState } from "react";
 import { tournamentsActionCaller } from "~/actions/tournaments/tournaments.index";
 import { Button } from "~/components/atoms/Button";
 import { Link } from "~/components/atoms/Link";
-import type { Data, Dto } from "~/types/base";
+import type { Dto } from "~/types/base";
 import type { Tournament } from "~/types/tournament";
 
-type Props = Data<Dto<Tournament>[]>;
-
+interface Props {
+  data: Dto<Tournament>[];
+}
 const TournamentsTemplate: React.FC<Props> = (props) => {
   const { data } = props;
   const [currentData, setCurrentData] = useState(data);

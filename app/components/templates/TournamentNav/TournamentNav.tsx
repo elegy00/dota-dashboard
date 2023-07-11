@@ -27,8 +27,7 @@ const TournamentNav: React.FC<Props> = (props) => {
       });
 
       if (res.status === 200) {
-        const result = (await res.json()) as unknown as Dto<Tournament>;
-        console.log(result);
+        (await res.json()) as unknown as Dto<Tournament>;
         return navigate(`./match/${match.matchId}?added=true`);
       }
     },

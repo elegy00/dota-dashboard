@@ -40,17 +40,18 @@ export default function MatchDetails() {
     <>
       <h3>Players</h3>
       <div className="grid grid-cols-2 gap-2" key={match?.match_id}>
-        {match?.players.map((p) => {
+        {match?.players.map((p, index) => {
           const hero = heroes.find((h) => h.id === p.hero_id);
           return (
-            <Fragment key={p.account_id}>
-              <div>{p.personaname ?? p.account_id}</div>
+            <Fragment key={p.hero_id}>
+              <div>{p.personaname ?? `player ${index + 1}`}</div>
               <div className="">
                 {hero && (
                   <img
                     alt={hero.localized_name}
                     className="object-cover w-40 p-1 border-2 border-grey-300 rounded-md"
                     src={hero.imgPath}
+                    key={hero.id}
                   />
                 )}
               </div>

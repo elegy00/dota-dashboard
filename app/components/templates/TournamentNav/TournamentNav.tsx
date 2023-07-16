@@ -74,6 +74,7 @@ const TournamentNav: React.FC<Props> = (props) => {
           </li>
         ))}
       </ul>
+      
     </>
   );
 };

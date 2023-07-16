@@ -1,0 +1,28 @@
+import type { AggregationEntry } from "~/types/aggregation";
+import { AggregationValueCategoryColumn } from "./AggregationValueCategoryColumn";
+
+interface Props {
+  entry: AggregationEntry;
+}
+
+const AggregationEntryRow: React.FC<Props> = (props) => {
+  const { entry } = props;
+  return (
+    <>
+      <div>{entry.label}</div>
+      {entry.hero && (
+        <img
+          alt={entry.hero.name}
+          className="object-cover w-40 p-1 border-2 border-grey-300 rounded-md"
+          src={entry.hero.heroImageUrl}
+          key={entry.hero.name}
+        />
+      )}
+      {entry.categories.map((cat) => (
+        <AggregationValueCategoryColumn key={cat.id} category={cat} />
+      ))}
+    </>
+  );
+};
+
+export { AggregationEntryRow };

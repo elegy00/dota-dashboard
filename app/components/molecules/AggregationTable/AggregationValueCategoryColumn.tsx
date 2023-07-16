@@ -1,5 +1,6 @@
 import type { AggregationValueCategory } from "~/types/aggregation";
 import { AggregationValueGroupColumn } from "./AggregationValueGroupColumn";
+import { valueBorder, categoryBorder } from "./styles";
 
 interface Props {
   category: AggregationValueCategory;
@@ -18,8 +19,16 @@ const AggregationValueCategoryColumn: React.FC<Props> = (props) => {
           key={entry.hero.name}
         />
       )} */}
-      {category.valueGroups.map((valueGroup) => (
-        <AggregationValueGroupColumn key={valueGroup.id} group={valueGroup} />
+      {category.valueGroups.map((valueGroup, index) => (
+        <AggregationValueGroupColumn
+          key={valueGroup.id}
+          group={valueGroup}
+          className={
+            index < category.valueGroups.length - 1
+              ? valueBorder
+              : categoryBorder
+          }
+        />
       ))}
     </>
   );

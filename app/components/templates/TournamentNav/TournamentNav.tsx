@@ -74,7 +74,18 @@ const TournamentNav: React.FC<Props> = (props) => {
           </li>
         ))}
       </ul>
-      
+      <h2>Views</h2>
+      <ul>
+        <li>
+          <Link to={`./view/tournamentByPlayers`}>tournamentByPlayers</Link>
+        </li>
+        <li>
+          <Link to={`./view/tournamentByHeroes`}>tournamentByHeroes</Link>
+        </li>
+        <li>
+          <Link to={`./view/tournamentByMatches`}>tournamentByMatches</Link>
+        </li>
+      </ul>
     </>
   );
 };

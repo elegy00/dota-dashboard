@@ -4,15 +4,30 @@ import type {
   AggregationValueCategory,
   AggregationValueGroup,
 } from "~/types/aggregation";
-import type { Match, Player } from "~/types/opendota";
+import type { Player } from "~/types/opendota";
+import type { Tournament } from "~/types/tournament";
 import { heroToHeroImage } from "./heroToHeroImage";
+import type { WithId } from "mongodb";
 
-export const matchToMatchAggregation = (match: Match): Aggregation => {
+export const tournamentToByPlayersAggregation = (
+  tournament: WithId<Tournament>
+): Aggregation => {
+  var playersTotal = new Set(
+    tournament.matches
+      .map((m) => m.players)
+      .flat()
+      .map((p) => p.account_id)
+      .filter((p) => p)
+  );
+
+  console.log({ playersTotal });
+
   return {
     type: "match",
-    id: match.match_id.toString(),
-    label: match.match_id.toString(),
-    entries: match.players.map(playerToEntry),
+    id: tournament._id.toString(),
+    label: tournament.name,
+    entries: [],
+    // entries: match.players.map(playerToEntry),
   };
 };
 
@@ -20,46 +35,8 @@ const playerToEntry = (player: Player, index: number): AggregationEntry => {
   return {
     hero: heroToHeroImage(player.hero_id),
     id: player.hero_id.toString(),
-    categories: [playerKDACategory(player), playerWealthCategory(player)],
+    categories: [playerKDACategory(player)],
     label: player.personaname ?? `player ${index + 1}`,
-  };
-};
-
-const playerWealthCategory = (player: Player): AggregationValueCategory => {
-  return {
-    id: "gold",
-    label: "gold",
-    valueGroups: [
-      playerNetWorthTotal(player),
-      playerGoldTotal(player),
-      playerGpm(player),
-    ],
-  };
-};
-const playerGpm = (player: Player): AggregationValueGroup => {
-  return {
-    id: "gpm",
-    label: "per minute",
-    grouping: "sum",
-    values: [{ id: "1", label: "", value: player.gold_per_min }],
-  };
-};
-
-const playerNetWorthTotal = (player: Player): AggregationValueGroup => {
-  return {
-    id: "netWorth",
-    label: "netWorth",
-    grouping: "sum",
-    values: [{ id: "1", label: "", value: player.net_worth }],
-  };
-};
-
-const playerGoldTotal = (player: Player): AggregationValueGroup => {
-  return {
-    id: "goldTotal",
-    label: "total",
-    grouping: "sum",
-    values: [{ id: "1", label: "", value: player.gold }],
   };
 };
 

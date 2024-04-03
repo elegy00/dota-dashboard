@@ -1,36 +1,47 @@
-# Welcome to Remix + Vite!
+# Welcome to Remix!
 
-📖 See the [Remix docs](https://remix.run/docs) and the [Remix Vite docs](https://remix.run/docs/en/main/future/vite) for details on supported features.
+- [Remix Docs](https://remix.run/docs)
+
+## Fly Setup
+
+1. [Install `flyctl`](https://fly.io/docs/getting-started/installing-flyctl/)
+
+2. Sign up and log in to Fly
+
+```sh
+flyctl auth signup
+```
+
+3. Setup Fly. It might ask if you want to deploy, say no since you haven't built the app yet.
+
+```sh
+flyctl launch
+```
 
 ## Development
 
-Run the Vite dev server:
+From your terminal:
 
-```shellscript
+```sh
 npm run dev
 ```
 
+This starts your app in development mode, rebuilding assets on file changes.
+
 ## Deployment
 
-First, build your app for production:
+If you've followed the setup instructions already, all you need to do is run this:
 
 ```sh
-npm run build
+npm run deploy
 ```
 
-Then run the app in production mode:
+You can run `flyctl info` to get the url and ip address of your server.
 
-```sh
-npm start
-```
+Check out the [fly docs](https://fly.io/docs/getting-started/node/) for more information.
 
-Now you'll need to pick a host to deploy it to.
+### QuickFixes:
 
-### DIY
+### TypeError: (0 , import_jsx_dev_runtime.jsxDEV) is not a function
 
-If you're familiar with deploying Node applications, the built-in Remix app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-- `build/server`
-- `build/client`
+stop the `npm run dev`, run `npm run build` and then rerun `npm run dev`

@@ -1,4 +1,4 @@
-import type { V2_MetaFunction } from "@remix-run/react";
+import type { MetaFunction } from "@remix-run/react";
 import { useNavigate } from "@remix-run/react";
 import { useCallback } from "react";
 import { tournamentsActionCaller } from "~/actions/tournaments/tournaments.index";
@@ -6,7 +6,7 @@ import { TournamentForm } from "~/components/organism/TournamentForm/TournamentF
 import { pageTitle } from "~/util/meta";
 import type { TournamentFm } from "~/validation/tournamentSchema";
 
-export const meta: V2_MetaFunction = () => {
+export const meta: MetaFunction = () => {
   return [{ title: pageTitle("add tournament") }];
 };
 

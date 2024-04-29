@@ -1,27 +1,31 @@
-import type { LoaderArgs } from "@remix-run/node";
+import type { LoaderFunctionArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
+import { AggregationTable } from "~/components/molecules/AggregationTable";
 import { TournamentService } from "~/services";
+import { tournamentToByPlayersAggregation } from "~/transformation/tournamentToByPlayersAggregation";
+import type { Aggregation } from "~/types/aggregation";
 
-export const loader = async ({ params }: LoaderArgs) => {
-  var tournamentId = params["tournament_id"];
-  var viewId = params["view_id"];
+export const loader = async ({ params }: LoaderFunctionArgs) => {
+  const tournamentId = params["tournament_id"];
+  const viewId = params["view_id"];
   if (tournamentId === undefined) throw new Error("tournament_id not defined");
-  if (viewId === undefined) throw new Error("viewId not defined");
 
-  var tournament = await TournamentService.getTournamentById(tournamentId);
-  // var match = tournament?.matches.find(
-  //   (m) => m.match_id === parseInt(matchId!)
-  // );
+  const tournament = await TournamentService.getTournamentById(tournamentId);
+
+  let aggregation: Aggregation | undefined;
+
+  if (viewId === "tournamentByPlayers" && tournament) {
+    aggregation = tournamentToByPlayersAggregation(tournament);
+  }
 
   return json({
-    viewId,
-    // match,
+    aggregation,
   });
 };
 
 export default function ViewDetails() {
-  const { viewId } = useLoaderData<typeof loader>();
+  const { aggregation } = useLoaderData<typeof loader>();
 
-  return <div>{`SOME VIEW ${viewId}`}</div>;
+  return <>{aggregation && <AggregationTable aggregation={aggregation} />}</>;
 }

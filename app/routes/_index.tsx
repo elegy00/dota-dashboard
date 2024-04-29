@@ -1,8 +1,8 @@
-import type { V2_MetaFunction } from "@remix-run/node";
+import type { MetaFunction } from "@remix-run/node";
 import { Link } from "~/components/atoms/Link";
 import { pageTitle } from "~/util/meta";
 
-export const meta: V2_MetaFunction = () => {
+export const meta: MetaFunction = () => {
   return [{ title: pageTitle("home") }];
 };
 

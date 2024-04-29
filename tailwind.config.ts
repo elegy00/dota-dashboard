@@ -51,6 +51,8 @@ export default {
     },
     extend: {},
   },
-  plugins: [],
+  plugins: [ ({ addVariant }: any)=> {
+    addVariant('child', '& > *');
+}],
 } satisfies Config
 

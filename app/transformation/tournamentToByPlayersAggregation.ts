@@ -1,80 +1,59 @@
-import type {
-  Aggregation,
-  AggregationEntry,
-  AggregationValueCategory,
-  AggregationValueGroup,
-} from "~/types/aggregation";
+import type { WithId } from "mongodb";
+import type { Aggregation, AggregationEntry } from "~/types/aggregation";
 import type { Player } from "~/types/opendota";
 import type { Tournament } from "~/types/tournament";
-import { heroToHeroImage } from "./heroToHeroImage";
-import type { WithId } from "mongodb";
+import { playerKDACategory } from "./base";
 
 export const tournamentToByPlayersAggregation = (
   tournament: WithId<Tournament>
 ): Aggregation => {
-  var playersTotal = new Set(
-    tournament.matches
-      .map((m) => m.players)
-      .flat()
-      .map((p) => p.account_id)
-      .filter((p) => p)
-  );
+  const matchPlayers = tournament.matches.map((m) => m.players).flat();
+  const playersTotal = [
+    ...new Set(matchPlayers.map((p) => p.account_id).filter((p) => p)),
+  ] as number[];
 
   console.log({ playersTotal });
 
+  const playersRecord = playersTotal.reduce<Record<number, Player[]>>(
+    (dict, account_id) => {
+      return {
+        ...dict,
+        [account_id]: matchPlayers.filter((mp) => mp.account_id === account_id),
+      };
+    },
+    {}
+  );
+
   return {
-    type: "match",
+    type: "tournamentByPlayers",
     id: tournament._id.toString(),
     label: tournament.name,
-    entries: [],
-    // entries: match.players.map(playerToEntry),
+    entries: Object.values(playersRecord).map(playerToEntry),
   };
 };
 
-const playerToEntry = (player: Player, index: number): AggregationEntry => {
+const playerToEntry = (
+  matchPlayers: Player[],
+  index: number
+): AggregationEntry => {
   return {
-    hero: heroToHeroImage(player.hero_id),
-    id: player.hero_id.toString(),
-    categories: [playerKDACategory(player)],
-    label: player.personaname ?? `player ${index + 1}`,
+    hero: null,
+    id: (matchPlayers[0].account_id ?? index).toString(),
+    categories: [playerKDACategory(sumMatchPlayerStats(matchPlayers))],
+    label: matchPlayers[0].personaname ?? `player ${index + 1}`,
   };
 };
 
-const playerKDACategory = (player: Player): AggregationValueCategory => {
-  return {
-    id: "kda",
-    label: "",
-    valueGroups: [
-      playerKillValueGroup(player),
-      playerDeathValueGroup(player),
-      playerAssistValueGroup(player),
-    ],
-  };
-};
-
-const playerKillValueGroup = (player: Player): AggregationValueGroup => {
-  return {
-    id: "kill",
-    label: "k",
-    grouping: "sum",
-    values: [{ id: "1", label: "K", value: player.kills }],
-  };
-};
-
-const playerDeathValueGroup = (player: Player): AggregationValueGroup => {
-  return {
-    id: "death",
-    label: "d",
-    grouping: "sum",
-    values: [{ id: "1", label: "D", value: player.deaths }],
-  };
-};
-
-const playerAssistValueGroup = (player: Player): AggregationValueGroup => {
-  return {
-    id: "assist",
-    label: "a",
-    grouping: "sum",
-    values: [{ id: "1", label: "D", value: player.assists }],
-  };
+const sumMatchPlayerStats = (matchPlayers: Player[]): Player => {
+  return matchPlayers.reduce<Player>((sum, current, index) => {
+    if (index === 0) {
+      return sum;
+    }
+    return {
+      ...sum,
+      kills: sum.kills + current.kills,
+      deaths: sum.deaths + current.deaths,
+      assists: sum.assists + current.assists,
+    };
+  }, matchPlayers[0]);
 };

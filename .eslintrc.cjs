@@ -73,6 +73,7 @@ module.exports = {
       ],
     },
 
+    { rules: { "react/prop-types": "off" } },
     // Node
     {
       files: [".eslintrc.cjs"],

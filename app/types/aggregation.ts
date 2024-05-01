@@ -9,7 +9,6 @@ export type AggregationType =
   | "tournamentByHeroes"
   | "tournamentByMatches";
 
-export type AggregationGrouping = "sum" | "avg";
 
 export interface Aggregation extends Displayable {
   type: AggregationType;
@@ -26,7 +25,6 @@ export interface AggregationValueCategory extends Displayable {
 }
 
 export interface AggregationValueGroup extends Displayable {
-  grouping: AggregationGrouping;
   values: AggregationValue[];
 }
 

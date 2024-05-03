@@ -1,8 +1,8 @@
-import type { ActionArgs } from "@remix-run/node"; // or cloudflare/deno
-import { tournamentsActionExecutor } from "~/actions/tournaments/tournaments.index";
+import type { ActionFunctionArgs } from "@remix-run/node"; // or cloudflare/deno
+import { tournamentsActionExecutor } from "~/actions/tournaments/tournaments.index.server";
 import type { ActionMethod } from "~/actions/types";
 
-export const action = async (args: ActionArgs) => {
+export const action = async (args: ActionFunctionArgs) => {
   const action = tournamentsActionExecutor[args.request.method as ActionMethod];
   if (action) {
     return action(args);

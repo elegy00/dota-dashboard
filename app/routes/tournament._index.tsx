@@ -2,7 +2,7 @@ import type { MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { TournamentsTemplate } from "~/components/templates/TournamentsTemplate";
-import { TournamentService } from "~/services";
+import { TournamentService } from "~/services/tournamentService.server";
 import { pageTitle } from "~/util/meta";
 
 export const loader = async () => {

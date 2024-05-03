@@ -1,8 +1,8 @@
-import type { ActionArgs } from "@remix-run/node"; // or cloudflare/deno
-import { matchActionExecutor } from "~/actions/matches/match.index";
+import type { ActionFunctionArgs } from "@remix-run/node"; // or cloudflare/deno
+import { matchActionExecutor } from "~/actions/matches/match.index.server";
 import type { ActionMethod } from "~/actions/types";
 
-export const action = async (args: ActionArgs) => {
+export const action = async (args: ActionFunctionArgs) => {
   const action = matchActionExecutor[args.request.method as ActionMethod];
   if (action) {
     return action(args);

@@ -2,7 +2,7 @@ import type { LoaderFunctionArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { AggregationTable } from "~/components/molecules/AggregationTable";
-import { TournamentService } from "~/services";
+import { TournamentService } from "~/services/index.server";
 import { tournamentToByPlayersAggregation } from "~/transformation/tournamentToByPlayersAggregation";
 import type { Aggregation } from "~/types/aggregation";
 

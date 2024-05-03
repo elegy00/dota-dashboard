@@ -13,7 +13,7 @@ const AggregationEntryRow: React.FC<Props> = (props) => {
       {entry.hero && (
         <img
           alt={entry.hero.name}
-          className="object-cover w-40 p-1 border-2 border-grey-300 rounded-md"
+          className="object-cover w-40 p-1 border-2 border-grey-300 rounded-md mb-2"
           src={entry.hero.heroImageUrl}
           key={entry.hero.name}
         />

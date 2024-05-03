@@ -1,8 +1,6 @@
-import type { ActionArgs } from "@remix-run/node";
-import type { ActionMethod } from "../types";
-import { addMatch, onMatchAdded } from "./match.add";
+import { addMatch } from "./match.add";
+import { deleteMatch } from "./match.delete";
 import type { MatchUrlParams } from "./types";
-import { deleteMatch, onMatchDelete } from "./match.delete";
 
 const path = (params: MatchUrlParams) =>
   `/api/tournament/${params.tournamentId}/match`;
@@ -10,11 +8,4 @@ const path = (params: MatchUrlParams) =>
 export const matchActionCaller = {
   delete: deleteMatch({ method: "DELETE", path }),
   add: addMatch({ method: "POST", path }),
-};
-
-export const matchActionExecutor: {
-  [key in ActionMethod]?: (arg: ActionArgs) => any;
-} = {
-  DELETE: onMatchDelete,
-  POST: onMatchAdded,
 };

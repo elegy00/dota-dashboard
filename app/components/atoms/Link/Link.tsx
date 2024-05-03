@@ -3,7 +3,6 @@ import { Link as RemixLink } from "@remix-run/react";
 
 const Link: React.FC<LinkProps> = (props) => {
   return (
-    // eslint-disable-next-line jsx-a11y/anchor-has-content
     <RemixLink
       {...props}
       className={[

@@ -17,13 +17,10 @@ const isAuthorized = (request: Request) => {
     .toString()
     .split(":");
 
-  console.log({
-    username,
-    password,
-    usr: process.env.USERNAME,
-    pw: process.env.PASSWORD,
-  });
-  return username === process.env.AUTH_USERNAME && password === process.env.AUTH_PASSWORD;
+  return (
+    username === process.env.AUTH_USERNAME &&
+    password === process.env.AUTH_PASSWORD
+  );
 };
 
 export const headers = () => ({

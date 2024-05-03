@@ -3,7 +3,7 @@ import { json } from "@remix-run/node";
 import type { ShouldRevalidateFunction } from "@remix-run/react";
 import { Outlet, useLoaderData } from "@remix-run/react";
 import { TournamentNav } from "~/components/templates/TournamentNav";
-import { TournamentService } from "~/services";
+import { TournamentService } from "~/services/index.server";
 import { pageTitle } from "~/util/meta";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {

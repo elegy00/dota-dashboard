@@ -1,4 +1,4 @@
-import type { WithId } from "mongodb";
+import type { WithId } from "~/util/mongodb.server";
 import type { Aggregation, AggregationEntry } from "~/types/aggregation";
 import type { Player } from "~/types/opendota";
 import type { Tournament } from "~/types/tournament";

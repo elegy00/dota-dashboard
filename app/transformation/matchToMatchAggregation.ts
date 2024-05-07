@@ -23,6 +23,6 @@ const playerToEntry = (player: Player, index: number): AggregationEntry => {
     hero: heroToHeroImage(player.hero_id),
     id: player.hero_id.toString(),
     categories: [playerKDACategory([player]), playerWealthCategory([player])],
-    label: player.personaname ?? `player ${index + 1}`,
+    label: player.name ?? player.personaname ?? `player ${index + 1}`,
   };
 };

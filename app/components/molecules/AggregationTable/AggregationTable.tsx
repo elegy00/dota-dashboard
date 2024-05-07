@@ -1,6 +1,7 @@
 import type { Aggregation } from "~/types/aggregation";
 import { AggregationEntryRow } from "./AggregationEntryRow";
 import { categoryBorder, valueBorder } from "./styles";
+import clsx from "clsx";
 
 interface Props {
   aggregation: Aggregation;
@@ -27,7 +28,7 @@ const AggregationTable: React.FC<Props> = (props) => {
       className="grid child:p-2"
       key={aggregation?.id}
       style={{
-        gridTemplateColumns: `repeat(${columnCount},minmax(4rem,8rem)`,
+        gridTemplateColumns: `repeat(${columnCount},minmax(4rem,1fr)`,
       }}
     >
       <div style={{ gridColumn: `span ${hasHeroImage ? 2 : 1}` }}></div>
@@ -35,7 +36,7 @@ const AggregationTable: React.FC<Props> = (props) => {
         <div
           key={cat.id}
           style={{ gridColumn: `span ${cat.valueGroups.length}` }}
-          className={categoryBorder}
+          className={clsx(categoryBorder, "text-center font-extrabold text-lg")}
         >
           {cat.label}
         </div>
@@ -45,9 +46,10 @@ const AggregationTable: React.FC<Props> = (props) => {
         cat.valueGroups.map((vg, index) => (
           <div
             key={vg.id}
-            className={
-              index < cat.valueGroups.length - 1 ? valueBorder : categoryBorder
-            }
+            className={clsx(
+              index < cat.valueGroups.length - 1 ? valueBorder : categoryBorder,
+              "text-right font-semibold text-lg"
+            )}
           >
             {vg.label}
           </div>

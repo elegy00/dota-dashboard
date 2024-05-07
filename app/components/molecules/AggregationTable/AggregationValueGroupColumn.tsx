@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import type { AggregationValueGroup } from "~/types/aggregation";
 import type { Styleable } from "~/types/styleable";
 
@@ -12,13 +13,11 @@ const AggregationValueGroupColumn: React.FC<Props> = (props) => {
     0
   );
   return (
-    <div className={className}>
-      {/* {group.grouping === "avg" &&
-        group.values.reduce<{ sum: number; count: number }>((ag, curr) => {})} */}
-      {/* {group.grouping === "sum" && */}
-      <span>{sum}</span>
-      <span className="ml-2">
-        {group.values.length > 1 && `(${sum / group.values.length})`}
+    <div className={clsx(className, "text-right flex flex-col")}>
+      <span className="font-bold">{sum}</span>
+      <span className="ml-2 text-sm">
+        {group.values.length > 1 &&
+          Math.round((sum * 10) / group.values.length) / 10}
       </span>
     </div>
   );

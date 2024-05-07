@@ -16,6 +16,7 @@
     "@remix-run/node": "^2.9.1",
     "@remix-run/react": "^2.9.1",
     "@remix-run/serve": "^2.9.1",
+    "clsx": "^2.1.1",
     "dotaconstants": "^7.16.0",
     "feather-icons": "^4.29.0",
     "isbot": "^4.1.0",

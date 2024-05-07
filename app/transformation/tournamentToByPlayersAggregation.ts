@@ -44,6 +44,9 @@ const playerToEntry = (
       playerKDACategory(matchPlayers),
       playerWealthCategory(matchPlayers),
     ],
-    label: matchPlayers[0].personaname ?? `player ${index + 1}`,
+    label:
+      matchPlayers[0].name ??
+      matchPlayers[0].personaname ??
+      `player ${index + 1}`,
   };
 };

@@ -13,10 +13,11 @@ interface Props {
   matchId?: string;
   viewId?: string;
   tournament: Dto<Tournament>;
+  matches: Dto<Match>[];
 }
 
 const TournamentNav: React.FC<Props> = (props) => {
-  const { tournament } = props;
+  const { tournament, matches } = props;
   const navigate = useNavigate();
   const [added, setAdded] = useState(new Date());
 
@@ -62,7 +63,7 @@ const TournamentNav: React.FC<Props> = (props) => {
 
       <h2>Matches</h2>
       <ul>
-        {tournament?.matches.map((match) => (
+        {matches.map((match) => (
           <li key={match.match_id}>
             <Link to={`./match/${match.match_id}`}>
               <span>{match.match_id}</span>

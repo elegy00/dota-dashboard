@@ -14,7 +14,7 @@ const onMatchDelete = async ({ request, params }: ActionFunctionArgs) => {
   if (tournament === null) {
     throw new Error("tournament not defined");
   }
-  var matches = tournament.matches.filter((m) => m.match_id !== bodyOb.id);
+  var matches = tournament.match_ids.filter((m) => m !== bodyOb.id);
   var updatedTournament = { ...tournament, matches };
   TournamentService.updateTournament(updatedTournament);
 

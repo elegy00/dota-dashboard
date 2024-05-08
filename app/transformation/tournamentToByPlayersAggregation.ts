@@ -1,15 +1,16 @@
 import type { WithId } from "~/util/mongodb.server";
 import type { Aggregation, AggregationEntry } from "~/types/aggregation";
-import type { Player } from "~/types/opendota";
+import type { Match, Player } from "~/types/opendota";
 import type { Tournament } from "~/types/tournament";
 import { playerKDACategory } from "./killDeathAssist";
 import { playerWLCategory } from "./winLose";
 import { playerWealthCategory } from "./wealth";
 
 export const tournamentToByPlayersAggregation = (
-  tournament: WithId<Tournament>
+  tournament: WithId<Tournament>,
+  matches: Match[]
 ): Aggregation => {
-  const matchPlayers = tournament.matches.map((m) => m.players).flat();
+  const matchPlayers = matches.map((m) => m.players).flat();
   const playersTotal = [
     ...new Set(matchPlayers.map((p) => p.account_id).filter((p) => p)),
   ] as number[];

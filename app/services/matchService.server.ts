@@ -1,14 +1,5 @@
 import { Match } from "~/types/opendota";
-import { MongoClient } from "~/util/mongodb.server";
-
-const getDatabaseConnection = () => {
-  !process && console.log("NO PROCESS");
-  const uri = process.env.DB_CONNECTION ?? "";
-  const client = new MongoClient(uri);
-  return client.db("dota-dashboard");
-};
-
-const database = getDatabaseConnection();
+import { database } from "./database.server";
 
 const matches = database.collection<Match>("match");
 

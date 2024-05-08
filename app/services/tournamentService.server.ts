@@ -1,15 +1,7 @@
 import type { WithId } from "mongodb";
-import { MongoClient, ObjectId } from "~/util/mongodb.server";
 import type { Tournament } from "~/types/tournament";
-
-const getDatabaseConnection = () => {
-  !process && console.log("NO PROCESS");
-  const uri = process.env.DB_CONNECTION ?? "";
-  const client = new MongoClient(uri);
-  return client.db("dota-dashboard");
-};
-
-const database = getDatabaseConnection();
+import { ObjectId } from "~/util/mongodb.server";
+import { database } from "./database.server";
 
 const tournaments = database.collection<Tournament>("tournaments");
 

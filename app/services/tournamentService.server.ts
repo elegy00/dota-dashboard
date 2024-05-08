@@ -1,5 +1,4 @@
 import type { WithId } from "mongodb";
-// import { MongoClient, ObjectId } from "mongodb";
 import { MongoClient, ObjectId } from "~/util/mongodb.server";
 import type { Tournament } from "~/types/tournament";
 

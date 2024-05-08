@@ -13,9 +13,9 @@ const onTournamentAdd = async ({
   const result = await TournamentService.addTournament({
     name: tournament.name,
     description: tournament.description,
-    matches: [],
+    match_ids: [],
   });
-  return { ...tournament, _id: result.insertedId, matches: [] };
+  return { ...tournament, _id: result.insertedId, match_ids: [] };
 };
 
 export { onTournamentAdd };

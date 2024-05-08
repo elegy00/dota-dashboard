@@ -6,6 +6,7 @@ import type { Tournament } from "~/types/tournament";
 import { matchSchema, type MatchFm } from "~/validation/matchSchema";
 import type { ActionRoute } from "../types";
 import type { MatchUrlParams } from "./types";
+import { MatchService } from "~/services/matchService.server";
 
 const onMatchAdded = async ({
   request,
@@ -26,11 +27,17 @@ const onMatchAdded = async ({
 
   const match = (await res.json()) as Match;
   const tournament = await TournamentService.getTournamentById(id);
+  const addedMatch = await MatchService.addMatch(match);
   if (tournament === null) {
     throw new Error("tournament not defined");
   }
-  if (!tournament.matches.some((m) => m.match_id === match.match_id)) {
-    tournament.matches.push(match);
+
+  if (addedMatch === null) {
+    throw new Error("match not defined");
+  }
+
+  if (tournament.match_ids && !tournament.match_ids.includes(match.match_id)) {
+    tournament.match_ids.push(match.match_id);
     TournamentService.updateTournament(tournament);
   }
   return { ...tournament, _id: tournament._id.toString() };

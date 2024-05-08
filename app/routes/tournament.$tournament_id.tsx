@@ -4,6 +4,7 @@ import type { ShouldRevalidateFunction } from "@remix-run/react";
 import { Outlet, useLoaderData } from "@remix-run/react";
 import { TournamentNav } from "~/components/templates/TournamentNav";
 import { TournamentService } from "~/services/index.server";
+import { MatchService } from "~/services/matchService.server";
 import { pageTitle } from "~/util/meta";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
@@ -12,12 +13,16 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
     throw new Error("tournament_id not defined");
   }
   const tournament = await TournamentService.getTournamentById(id);
+  const matches = await MatchService.getMatchesByIds(
+    tournament?.match_ids ?? []
+  );
 
   if (id === undefined) {
     throw new Error("tournament not found");
   }
   return json({
     tournament,
+    matches,
   });
 };
 
@@ -30,11 +35,15 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 };
 
 const Tournament = () => {
-  const { tournament } = useLoaderData<typeof loader>();
+  const { tournament, matches } = useLoaderData<typeof loader>();
 
   return (
     <main>
-      <aside>{tournament && <TournamentNav tournament={tournament} />}</aside>
+      <aside>
+        {tournament && (
+          <TournamentNav tournament={tournament} matches={matches} />
+        )}
+      </aside>
       <Outlet />
     </main>
   );

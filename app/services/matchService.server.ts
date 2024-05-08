@@ -12,8 +12,15 @@ const database = getDatabaseConnection();
 
 const matches = database.collection<Match>("match");
 
+/**
+ * Only select part of the match from the DB
+ */
+const matchProjection = { match_id: 1, start_time: 1, players: 1 };
+
 const getMatchById = async (id: number) => {
-  const matchResult = await matches.find({ match_id: id }).toArray();
+  const matchResult = await matches
+    .find({ match_id: id }, { projection: matchProjection })
+    .toArray();
   return matchResult[0] ?? null;
 };
 
@@ -21,8 +28,10 @@ const MatchService = {
   getMatchById,
 
   getMatchesByIds: async (id: number[]) => {
-    console.log(id);
-    const matchResult = await matches.find({ match_id: { $in: id } }).toArray();
+    const matchResult = await matches
+      .find({ match_id: { $in: id } }, { projection: matchProjection })
+      .toArray();
+    console.log(matches);
     return matchResult;
   },
 

@@ -55,6 +55,17 @@ const TournamentNav: React.FC<Props> = (props) => {
     [navigate, tournament._id]
   );
 
+  const intl = new Intl.DateTimeFormat("de-CH", {
+    dateStyle: "medium",
+    timeStyle: "medium",
+    timeZone: "CET",
+  });
+
+  const sortedMatches = matches.sort(
+    (a, b) =>
+      new Date(b.start_time * 1000).getTime() -
+      new Date(a.start_time * 1000).getTime()
+  );
   return (
     <>
       <h2>Add Match</h2>
@@ -62,16 +73,33 @@ const TournamentNav: React.FC<Props> = (props) => {
       <MatchForm onSubmit={onSubmit} key={added.getTime()} />
 
       <h2>Matches</h2>
-      <ul>
-        {matches.map((match) => (
-          <li key={match.match_id}>
-            <Link to={`./match/${match.match_id}`}>
-              <span>{match.match_id}</span>
-              <span>:{new Date(match.start_time).toISOString()}</span>
+      <ul className="space-y-2">
+        {sortedMatches.map((match) => (
+          <li key={match.match_id} className="flex space-x-4 items-baseline">
+            <Link to={`./match/${match.match_id}`} className="space-x-2">
+              <span>{intl.format(new Date(match.start_time * 1000))}</span>
             </Link>
+
             <Button variant="secondary" onClick={deleteMatchT(match)}>
               DELETE
             </Button>
+
+            <a
+              href={`https://api.opendota.com/api/matches/${match.match_id}`}
+              target="_blank"
+              className="text-green-500 underline underline-offset-4 hover:text-green-600 duration-150 text-xs"
+              referrerPolicy="no-referrer"
+            >
+              raw data
+            </a>
+            <a
+              href={`https://www.dotabuff.com/matches/${match.match_id}`}
+              target="_blank"
+              className="text-green-500 underline underline-offset-4 hover:text-green-600 duration-150 text-xs"
+              referrerPolicy="no-referrer"
+            >
+              dotabuff
+            </a>
           </li>
         ))}
       </ul>

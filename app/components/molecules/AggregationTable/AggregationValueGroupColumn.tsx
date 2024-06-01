@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import type { AggregationValueGroup } from "~/types/aggregation";
 import type { Styleable } from "~/types/styleable";
+import { calcSumAndPercentage } from "~/util/calc";
 
 interface Props extends Styleable {
   group: AggregationValueGroup;
@@ -8,17 +9,13 @@ interface Props extends Styleable {
 
 const AggregationValueGroupColumn: React.FC<Props> = (props) => {
   const { group, className } = props;
-  const sum = group.values.reduce(
-    (sum, current) => sum + (current.value ?? 0),
-    0
-  );
+
+  const { sum, avg } = calcSumAndPercentage(group.values);
+
   return (
     <div className={clsx(className, "text-right flex flex-col")}>
       <span className="font-bold">{sum}</span>
-      <span className="ml-2 text-sm">
-        {group.values.length > 1 &&
-          Math.round((sum * 10) / group.values.length) / 10}
-      </span>
+      <span className="ml-2 text-sm">{group.values.length >= 1 && avg}</span>
     </div>
   );
 };

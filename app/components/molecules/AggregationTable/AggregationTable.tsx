@@ -2,13 +2,16 @@ import type { Aggregation } from "~/types/aggregation";
 import { AggregationEntryRow } from "./AggregationEntryRow";
 import { categoryBorder, valueBorder } from "./styles";
 import clsx from "clsx";
+import { useAggregationTableSort } from "./useAggregationTableSort";
 
 interface Props {
   aggregation: Aggregation;
 }
 
 const AggregationTable: React.FC<Props> = (props) => {
-  const { aggregation } = props;
+  const { aggregation, toggleNextSort, sort } = useAggregationTableSort(
+    props.aggregation
+  );
 
   if (aggregation.entries.length === 0) {
     return <>No Data</>;
@@ -44,15 +47,20 @@ const AggregationTable: React.FC<Props> = (props) => {
       <div style={{ gridColumn: `span ${hasHeroImage ? 2 : 1}` }}></div>
       {aggregation.entries[0].categories.map((cat) =>
         cat.valueGroups.map((vg, index) => (
-          <div
+          <button
             key={vg.id}
             className={clsx(
               index < cat.valueGroups.length - 1 ? valueBorder : categoryBorder,
-              "text-right font-semibold text-lg"
+              "flex flex-col text-right font-semibold text-lg italic"
+              // vg.id === sort.valueId && cat.id === sort.catId && "underline"
             )}
+            onClick={() => toggleNextSort({ catId: cat.id, valueId: vg.id })}
           >
-            {vg.label}
-          </div>
+            <span>{vg.label}</span>
+            {vg.id === sort.valueId && cat.id === sort.catId && (
+              <span className="text-xs">{`${sort.agg} ${sort.sortDir}`}</span>
+            )}
+          </button>
         ))
       )}
       {aggregation?.entries.map((entry) => (

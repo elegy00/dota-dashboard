@@ -34,14 +34,14 @@ const MatchForm = ({ onSubmit }: Props) => {
           <p className="text-xs text-grey-700 mt-0">{errors.matchId.message}</p>
         )}
       </div>
-      <div className="w-full">
+      {/* <div className="w-full">
         <TextArea {...register("description")} className="w-full" />
         {errors.description && (
           <p className="text-xs text-grey-700 mt-0">
             {errors.description.message}
           </p>
         )}
-      </div>
+      </div> */}
       <Button>Add</Button>
     </form>
   );

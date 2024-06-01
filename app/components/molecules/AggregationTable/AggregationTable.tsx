@@ -52,7 +52,6 @@ const AggregationTable: React.FC<Props> = (props) => {
             className={clsx(
               index < cat.valueGroups.length - 1 ? valueBorder : categoryBorder,
               "flex flex-col text-right font-semibold text-lg italic"
-              // vg.id === sort.valueId && cat.id === sort.catId && "underline"
             )}
             onClick={() => toggleNextSort({ catId: cat.id, valueId: vg.id })}
           >

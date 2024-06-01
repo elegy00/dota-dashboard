@@ -2,13 +2,14 @@ import type { Aggregation } from "~/types/aggregation";
 import { AggregationEntryRow } from "./AggregationEntryRow";
 import { categoryBorder, valueBorder } from "./styles";
 import clsx from "clsx";
+import { useAggregationTableSort } from "./useAggregationTableSort";
 
 interface Props {
   aggregation: Aggregation;
 }
 
 const AggregationTable: React.FC<Props> = (props) => {
-  const { aggregation } = props;
+  const { aggregation } = useAggregationTableSort(props.aggregation);
 
   if (aggregation.entries.length === 0) {
     return <>No Data</>;

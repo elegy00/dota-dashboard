@@ -22,7 +22,6 @@ const MatchService = {
     const matchResult = await matches
       .find({ match_id: { $in: id } }, { projection: matchProjection })
       .toArray();
-    console.log(matches);
     return matchResult;
   },
 

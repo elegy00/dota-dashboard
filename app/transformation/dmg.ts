@@ -14,6 +14,7 @@ export const playerDmgCategory = (
       playerDmgValueGroup(player),
       playerTowerValueGroup(player),
       playerHealValueGroup(player),
+      playerDmgTakenValueGroup(player),
     ],
   };
 };
@@ -50,6 +51,18 @@ const playerHealValueGroup = (players: Player[]): AggregationValueGroup => {
       id: i.toString(),
       label: "heal",
       value: p.hero_healing,
+    })),
+  };
+};
+
+const playerDmgTakenValueGroup = (players: Player[]): AggregationValueGroup => {
+  return {
+    id: "taken",
+    label: "taken",
+    values: players.map((p, i) => ({
+      id: i.toString(),
+      label: "taken",
+      value: p.damage_taken,
     })),
   };
 };

@@ -6,6 +6,8 @@ import { playerKDACategory } from "./killDeathAssist";
 import { playerWLCategory } from "./winLose";
 import { playerWealthCategory } from "./wealth";
 import { playerDmgCategory } from "./dmg";
+import { playerSupportCategory } from "./support";
+import { playerLastHitDeniesCategory } from "./lhdn";
 
 export const tournamentToByPlayersAggregation = (
   tournament: WithId<Tournament>,
@@ -46,6 +48,8 @@ const playerToEntry = (
       playerKDACategory(matchPlayers),
       playerWealthCategory(matchPlayers),
       playerDmgCategory(matchPlayers),
+      playerSupportCategory(matchPlayers),
+      playerLastHitDeniesCategory(matchPlayers),
     ],
     label:
       matchPlayers[0].name ??

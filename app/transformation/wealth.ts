@@ -12,7 +12,7 @@ export const playerWealthCategory = (
     label: "gold",
     valueGroups: [
       playerNetWorthTotal(players),
-      playerGoldTotal(players),
+      // playerGoldTotal(players),
       playerGpm(players),
     ],
   };

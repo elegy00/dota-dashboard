@@ -14,6 +14,7 @@ export const playerKDACategory = (
       playerKillValueGroup(player),
       playerDeathValueGroup(player),
       playerAssistValueGroup(player),
+      playerKdaRatioValueGroup(player),
     ],
   };
 };
@@ -50,6 +51,18 @@ const playerAssistValueGroup = (players: Player[]): AggregationValueGroup => {
       id: i.toString(),
       label: "w",
       value: p.assists,
+    })),
+  };
+};
+
+const playerKdaRatioValueGroup = (players: Player[]): AggregationValueGroup => {
+  return {
+    id: "kda",
+    label: "kda",
+    values: players.map((p, i) => ({
+      id: i.toString(),
+      label: "kda",
+      value: p.kda,
     })),
   };
 };

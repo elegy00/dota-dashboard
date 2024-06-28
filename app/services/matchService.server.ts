@@ -28,7 +28,8 @@ const MatchService = {
   addMatch: async (match: Match) => {
     const existingMatch = await getMatchById(match.match_id);
     if (existingMatch) {
-      matches.updateOne({ match_id: { $in: [match.match_id] } }, match);
+      matches.replaceOne({ _id: existingMatch._id }, match);
+      return match;
     }
     return await matches.insertOne(match);
   },

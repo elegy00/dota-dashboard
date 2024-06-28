@@ -9,6 +9,8 @@ import { playerKDACategory } from "./killDeathAssist";
 import { heroToHeroImage } from "./heroToHeroImage";
 import { playerWealthCategory } from "./wealth";
 import { playerDmgCategory } from "./dmg";
+import { playerSupportCategory } from "./support";
+import { playerLastHitDeniesCategory } from "./lhdn";
 
 export const matchToMatchAggregation = (match: Match): Aggregation => {
   return {
@@ -27,6 +29,8 @@ const playerToEntry = (player: Player, index: number): AggregationEntry => {
       playerKDACategory([player]),
       playerWealthCategory([player]),
       playerDmgCategory([player]),
+      playerSupportCategory([player]),
+      playerLastHitDeniesCategory([player]),
     ],
     label: player.name ?? player.personaname ?? `player ${index + 1}`,
   };

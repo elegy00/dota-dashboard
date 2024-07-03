@@ -9,6 +9,7 @@ import { playerDmgCategory } from "./dmg";
 import { playerSupportCategory } from "./support";
 import { playerLastHitDeniesCategory } from "./lhdn";
 import { heroToHeroImage } from "./heroToHeroImage";
+import { playersByHeroGroup } from "./rootGroups";
 
 export const tournamentToByHeroesAggregation = (
   tournament: WithId<Tournament>,
@@ -53,5 +54,6 @@ const playerToEntry = (
       playerLastHitDeniesCategory(matchPlayers),
     ],
     label: hero.name,
+    rootBreakdown: playersByHeroGroup(matchPlayers),
   };
 };

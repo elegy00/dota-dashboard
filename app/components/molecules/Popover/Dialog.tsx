@@ -16,7 +16,7 @@ export function Dialog({ title, children, ...props }: DialogProps) {
       {...dialogProps}
       ref={ref}
       className="bg-grey-200 p-4"
-      style={{ padding: 30, maxWidth: 200, outline: "none" }}
+    //   style={{ padding: 30,  outline: "none" }}
     >
       {title && (
         <h3 {...titleProps} style={{ marginTop: 0 }}>

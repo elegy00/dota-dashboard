@@ -1,6 +1,7 @@
 import type { AggregationEntry } from "~/types/aggregation";
 import { AggregationValueCategoryColumn } from "./AggregationValueCategoryColumn";
 import { Dialog, PopoverTrigger } from "../Popover";
+import { Fragment } from "react/jsx-runtime";
 
 interface Props {
   entry: AggregationEntry;
@@ -8,12 +9,23 @@ interface Props {
 
 const AggregationEntryRow: React.FC<Props> = (props) => {
   const { entry } = props;
+
   return (
     <>
       {/* <div>{entry.label}</div> */}
-      <PopoverTrigger label={entry.label}>
+      <PopoverTrigger label={entry.label} className="text-left">
         {/* <>ASD</> */}
-        <Dialog>{entry.label}</Dialog>
+        <Dialog>
+          {entry.rootBreakdown?.label}
+          <div className="grid grid-cols-2">
+            {entry.rootBreakdown?.values.map((vl) => (
+              <Fragment key={vl.id}>
+                <div>{vl.label}</div>
+                <div>{vl.value}</div>
+              </Fragment>
+            ))}
+          </div>
+        </Dialog>
       </PopoverTrigger>
       {entry.hero && (
         <img

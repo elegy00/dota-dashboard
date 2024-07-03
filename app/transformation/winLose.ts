@@ -10,7 +10,23 @@ export const playerWLCategory = (
   return {
     id: "wl",
     label: "",
-    valueGroups: [playerWinValueGroup(player), playerLoseValueGroup(player)],
+    valueGroups: [
+      playerGameValueGroup(player),
+      playerWinValueGroup(player),
+      playerLoseValueGroup(player),
+    ],
+  };
+};
+
+const playerGameValueGroup = (players: Player[]): AggregationValueGroup => {
+  return {
+    id: "games",
+    label: "T",
+    values: players.map((p, i) => ({
+      id: i.toString(),
+      label: "T",
+      value: 1,
+    })),
   };
 };
 

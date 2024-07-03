@@ -8,6 +8,8 @@ import { playerWealthCategory } from "./wealth";
 import { playerDmgCategory } from "./dmg";
 import { playerSupportCategory } from "./support";
 import { playerLastHitDeniesCategory } from "./lhdn";
+import { playerName } from "~/util/playerName";
+import { playersByHeroGroup } from "./rootGroups";
 
 export const tournamentToByPlayersAggregation = (
   tournament: WithId<Tournament>,
@@ -51,9 +53,7 @@ const playerToEntry = (
       playerSupportCategory(matchPlayers),
       playerLastHitDeniesCategory(matchPlayers),
     ],
-    label:
-      matchPlayers[0].name ??
-      matchPlayers[0].personaname ??
-      `player ${index + 1}`,
+    label: playerName(matchPlayers[0]),
+    rootBreakdown: playersByHeroGroup(matchPlayers),
   };
 };

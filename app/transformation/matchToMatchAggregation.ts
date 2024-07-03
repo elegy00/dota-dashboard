@@ -11,6 +11,7 @@ import { playerWealthCategory } from "./wealth";
 import { playerDmgCategory } from "./dmg";
 import { playerSupportCategory } from "./support";
 import { playerLastHitDeniesCategory } from "./lhdn";
+import { playerName } from "~/util/playerName";
 
 export const matchToMatchAggregation = (match: Match): Aggregation => {
   return {
@@ -32,6 +33,7 @@ const playerToEntry = (player: Player, index: number): AggregationEntry => {
       playerSupportCategory([player]),
       playerLastHitDeniesCategory([player]),
     ],
-    label: player.name ?? player.personaname ?? `player ${index + 1}`,
+    label: playerName(player),
+    rootBreakdown: null,
   };
 };

@@ -31,7 +31,9 @@ const AggregationTable: React.FC<Props> = (props) => {
       className="grid child:p-2"
       key={aggregation?.id}
       style={{
-        gridTemplateColumns: `repeat(${columnCount},minmax(4rem,1fr)`,
+        gridTemplateColumns: `minmax(8rem,2fr) repeat(${
+          columnCount - 1
+        },minmax(4rem,1fr)`,
       }}
     >
       <div style={{ gridColumn: `span ${hasHeroImage ? 2 : 1}` }}></div>

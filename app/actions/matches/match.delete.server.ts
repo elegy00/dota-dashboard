@@ -2,9 +2,11 @@ import type { ActionFunctionArgs } from "@remix-run/node";
 import { TournamentService } from "~/services/index.server";
 import type { ActionRoute } from "../types";
 import { DeleteBody } from "./types";
+import { Tournament } from "~/types/tournament";
+import { WithId } from "mongodb";
 
 const onMatchDelete = async ({ request, params }: ActionFunctionArgs) => {
-  var id = params["tournament_id"];
+  const id = params["tournament_id"];
   if (id === undefined) {
     throw new Error("tournament_id not defined");
   }
@@ -14,11 +16,11 @@ const onMatchDelete = async ({ request, params }: ActionFunctionArgs) => {
   if (tournament === null) {
     throw new Error("tournament not defined");
   }
-  var matches = tournament.match_ids.filter((m) => m !== bodyOb.id);
-  var updatedTournament = { ...tournament, matches };
+  const match_ids = tournament.match_ids.filter((m) => m !== bodyOb.id);
+  const updatedTournament: WithId<Tournament> = { ...tournament, match_ids };
   TournamentService.updateTournament(updatedTournament);
 
-  return { ...tournament, _id: tournament._id.toString() };
+  return { ...tournament };
 };
 
 export { onMatchDelete };

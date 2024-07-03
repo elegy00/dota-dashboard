@@ -62,7 +62,7 @@ const playerDmgTakenValueGroup = (players: Player[]): AggregationValueGroup => {
     values: players.map((p, i) => ({
       id: i.toString(),
       label: "taken",
-      value: p.damage_taken,
+      value: Object.values(p.damage_taken).reduce((acc, curr) => acc + curr, 0),
     })),
   };
 };

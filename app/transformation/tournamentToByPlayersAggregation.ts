@@ -1,15 +1,15 @@
-import type { WithId } from "~/util/mongodb.server";
 import type { Aggregation, AggregationEntry } from "~/types/aggregation";
 import type { Match, Player } from "~/types/opendota";
 import type { Tournament } from "~/types/tournament";
-import { playerKDACategory } from "./killDeathAssist";
-import { playerWLCategory } from "./winLose";
-import { playerWealthCategory } from "./wealth";
-import { playerDmgCategory } from "./dmg";
-import { playerSupportCategory } from "./support";
-import { playerLastHitDeniesCategory } from "./lhdn";
+import type { WithId } from "~/util/mongodb.server";
 import { playerName } from "~/util/playerName";
-import { playersByHeroGroup } from "./rootGroups";
+import { playerDmgCategory } from "./dmg";
+import { heroIdentifierBuilder } from "./identifierGroups";
+import { playerKDACategory } from "./killDeathAssist";
+import { playerLastHitDeniesCategory } from "./lhdn";
+import { playerSupportCategory } from "./support";
+import { playerWealthCategory } from "./wealth";
+import { playerWLCategory } from "./winLose";
 
 export const tournamentToByPlayersAggregation = (
   tournament: WithId<Tournament>,
@@ -46,14 +46,13 @@ const playerToEntry = (
     hero: null,
     id: (matchPlayers[0].account_id ?? index).toString(),
     categories: [
-      playerWLCategory(matchPlayers),
-      playerKDACategory(matchPlayers),
-      playerWealthCategory(matchPlayers),
-      playerDmgCategory(matchPlayers),
-      playerSupportCategory(matchPlayers),
-      playerLastHitDeniesCategory(matchPlayers),
+      playerWLCategory(heroIdentifierBuilder)(matchPlayers),
+      playerKDACategory(heroIdentifierBuilder)(matchPlayers),
+      playerWealthCategory(heroIdentifierBuilder)(matchPlayers),
+      playerDmgCategory(heroIdentifierBuilder)(matchPlayers),
+      playerSupportCategory(heroIdentifierBuilder)(matchPlayers),
+      playerLastHitDeniesCategory(heroIdentifierBuilder)(matchPlayers),
     ],
     label: playerName(matchPlayers[0]),
-    rootBreakdown: playersByHeroGroup(matchPlayers),
   };
 };

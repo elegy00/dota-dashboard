@@ -29,7 +29,7 @@ function Button(
 }
 
 type PopoverTriggerProps = {
-  label: string;
+  label: ReactElement<any, string | JSXElementConstructor<any>>;
   children: ReactElement<any, string | JSXElementConstructor<any>>;
 } & Styleable;
 

@@ -12,21 +12,8 @@ const AggregationEntryRow: React.FC<Props> = (props) => {
 
   return (
     <>
-      {/* <div>{entry.label}</div> */}
-      <PopoverTrigger label={entry.label} className="text-left">
-        {/* <>ASD</> */}
-        <Dialog>
-          {entry.rootBreakdown?.label}
-          <div className="grid grid-cols-2">
-            {entry.rootBreakdown?.values.map((vl) => (
-              <Fragment key={vl.id}>
-                <div>{vl.label}</div>
-                <div>{vl.value}</div>
-              </Fragment>
-            ))}
-          </div>
-        </Dialog>
-      </PopoverTrigger>
+      <div>{entry.label}</div>
+
       {entry.hero && (
         <img
           alt={entry.hero.name}

@@ -12,6 +12,7 @@ import { playerDmgCategory } from "./dmg";
 import { playerSupportCategory } from "./support";
 import { playerLastHitDeniesCategory } from "./lhdn";
 import { playerName } from "~/util/playerName";
+import { playerIdentifierBuilder } from "./identifierGroups";
 
 export const matchToMatchAggregation = (match: Match): Aggregation => {
   return {
@@ -27,13 +28,12 @@ const playerToEntry = (player: Player, index: number): AggregationEntry => {
     hero: heroToHeroImage(player.hero_id),
     id: player.hero_id.toString(),
     categories: [
-      playerKDACategory([player]),
-      playerWealthCategory([player]),
-      playerDmgCategory([player]),
-      playerSupportCategory([player]),
-      playerLastHitDeniesCategory([player]),
+      playerKDACategory(playerIdentifierBuilder)([player]),
+      playerWealthCategory(playerIdentifierBuilder)([player]),
+      playerDmgCategory(playerIdentifierBuilder)([player]),
+      playerSupportCategory(playerIdentifierBuilder)([player]),
+      playerLastHitDeniesCategory(playerIdentifierBuilder)([player]),
     ],
     label: playerName(player),
-    rootBreakdown: null,
   };
 };

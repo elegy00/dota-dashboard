@@ -3,51 +3,58 @@ import {
   AggregationValueGroup,
 } from "~/types/aggregation";
 import { Player } from "~/types/opendota";
+import { IdentifierBuilder } from "./identifierGroups";
 
-export const playerWealthCategory = (
-  players: Player[]
-): AggregationValueCategory => {
-  return {
-    id: "gold",
-    label: "gold",
-    valueGroups: [
-      playerNetWorthTotal(players),
-      // playerGoldTotal(players),
-      playerGpm(players),
-    ],
+export const playerWealthCategory =
+  (identifierBuilder: IdentifierBuilder) =>
+  (players: Player[]): AggregationValueCategory => {
+    return {
+      id: "gold",
+      label: "gold",
+      valueGroups: [
+        playerNetWorthTotal(players, identifierBuilder),
+        // playerGoldTotal(players,identifierBuilder),
+        playerGpm(players, identifierBuilder),
+      ],
+    };
   };
-};
-const playerGpm = (players: Player[]): AggregationValueGroup => {
+const playerGpm = (
+  players: Player[],
+  identifierBuilder: IdentifierBuilder
+): AggregationValueGroup => {
   return {
     id: "gpm",
     label: "per minute",
-    values: players.map((p, i) => ({
-      id: i.toString(),
-      label: "w",
+    values: players.map((p) => ({
+      ...identifierBuilder(p),
       value: p.gold_per_min,
     })),
   };
 };
 
-const playerNetWorthTotal = (players: Player[]): AggregationValueGroup => {
+const playerNetWorthTotal = (
+  players: Player[],
+  identifierBuilder: IdentifierBuilder
+): AggregationValueGroup => {
   return {
     id: "netWorth",
     label: "netWorth",
-    values: players.map((p, i) => ({
-      id: i.toString(),
-      label: "w",
+    values: players.map((p) => ({
+      ...identifierBuilder(p),
       value: p.net_worth,
     })),
   };
 };
 
-const playerGoldTotal = (players: Player[]): AggregationValueGroup => {
+const playerGoldTotal = (
+  players: Player[],
+  identifierBuilder: IdentifierBuilder
+): AggregationValueGroup => {
   return {
     id: "goldTotal",
     label: "total",
-    values: players.map((p, i) => ({
-      id: i.toString(),
-      label: "w",
+    values: players.map((p) => ({
+      ...identifierBuilder(p),
       value: p.gold,
     })),
   };

@@ -1,5 +1,6 @@
 import type { AggregationEntry } from "~/types/aggregation";
 import { AggregationValueCategoryColumn } from "./AggregationValueCategoryColumn";
+import { Dialog, PopoverTrigger } from "../Popover";
 
 interface Props {
   entry: AggregationEntry;
@@ -9,7 +10,11 @@ const AggregationEntryRow: React.FC<Props> = (props) => {
   const { entry } = props;
   return (
     <>
-      <div>{entry.label}</div>
+      {/* <div>{entry.label}</div> */}
+      <PopoverTrigger label={entry.label}>
+        {/* <>ASD</> */}
+        <Dialog>{entry.label}</Dialog>
+      </PopoverTrigger>
       {entry.hero && (
         <img
           alt={entry.hero.name}

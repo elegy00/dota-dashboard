@@ -9,7 +9,6 @@ export type AggregationType =
   | "tournamentByHeroes"
   | "tournamentByMatches";
 
-
 export interface Aggregation extends Displayable {
   type: AggregationType;
   entries: AggregationEntry[];
@@ -28,8 +27,10 @@ export interface AggregationValueGroup extends Displayable {
   values: AggregationValue[];
 }
 
-export interface AggregationValue extends Displayable {
-  value: number | null;
+export type AggregationValue = AggregationBase<number>;
+
+export interface AggregationBase<T> extends Displayable {
+  value: T | null;
 }
 
 export interface HeroImage {

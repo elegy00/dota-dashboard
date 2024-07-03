@@ -61,7 +61,7 @@ export interface Player {
   damage: null;
   damage_inflictor: null;
   damage_inflictor_received: null;
-  damage_taken: null;
+  damage_taken: Record<string, number>;
   damage_targets: null;
   deaths: number;
   denies: number;

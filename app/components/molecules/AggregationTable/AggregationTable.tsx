@@ -36,24 +36,32 @@ const AggregationTable: React.FC<Props> = (props) => {
         },minmax(4rem,1fr)`,
       }}
     >
-      <div style={{ gridColumn: `span ${hasHeroImage ? 2 : 1}` }}></div>
+      <div
+        style={{ gridColumn: `span ${hasHeroImage ? 2 : 1}` }}
+      ></div>
       {aggregation.entries[0].categories.map((cat) => (
         <div
           key={cat.id}
           style={{ gridColumn: `span ${cat.valueGroups.length}` }}
-          className={clsx(categoryBorder, "text-center font-extrabold text-lg")}
+          className={clsx(
+            categoryBorder,
+            "text-center font-extrabold text-lg "
+          )}
         >
           {cat.label}
         </div>
       ))}
-      <div style={{ gridColumn: `span ${hasHeroImage ? 2 : 1}` }}></div>
+      <div
+        className="sticky top-0 bg-grey-100"
+        style={{ gridColumn: `span ${hasHeroImage ? 2 : 1}` }}
+      ></div>
       {aggregation.entries[0].categories.map((cat) =>
         cat.valueGroups.map((vg, index) => (
           <button
             key={vg.id}
             className={clsx(
               index < cat.valueGroups.length - 1 ? valueBorder : categoryBorder,
-              "flex flex-col text-right font-semibold text-lg italic"
+              "flex flex-col text-right font-semibold text-lg italic sticky top-0 bg-grey-100"
             )}
             onClick={() => toggleNextSort({ catId: cat.id, valueId: vg.id })}
           >

@@ -15,7 +15,7 @@ export const playerDmgCategory =
         playerDmgValueGroup(player, identifierBuilder),
         playerTowerValueGroup(player, identifierBuilder),
         playerHealValueGroup(player, identifierBuilder),
-        playerDmgTakenValueGroup(player, identifierBuilder),
+        // playerDmgTakenValueGroup(player, identifierBuilder),
       ],
     };
   };

@@ -1,5 +1,5 @@
 # Welcome to Remix!
-
+With vanilla extract
 - [Remix Docs](https://remix.run/docs)
 
 ## Fly Setup

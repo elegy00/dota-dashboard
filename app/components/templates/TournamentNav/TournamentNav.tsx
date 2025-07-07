@@ -1,4 +1,4 @@
-import { useNavigate } from "@remix-run/react";
+import { useNavigate } from "react-router";
 import { useCallback, useState } from "react";
 import { matchActionCaller } from "~/actions/matches/match.index";
 import { Button } from "~/components/atoms/Button";

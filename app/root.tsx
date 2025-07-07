@@ -1,12 +1,5 @@
-import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
-import {
-  Links,
-  Meta,
-  Outlet,
-  Scripts,
-  ScrollRestoration,
-  json,
-} from "@remix-run/react";
+import type { LinksFunction, LoaderFunctionArgs } from "react-router";
+import { Links, Meta, Outlet, Scripts, ScrollRestoration } from "react-router";
 
 import { ColorContext, useColorThemeState } from "./state/colorContext";
 import { Layout } from "./components/organism/Layout";
@@ -37,15 +30,15 @@ export const headers = () => ({
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   if (!isAuthorized(request)) {
-    return json({ authorized: false }, { status: 401 });
+    throw new Response("Unauthorized");
   }
 
   // Load data for password-protected page here.
 
-  return json({
+  return {
     authorized: true,
     // Include extra data for password-protected page here.
-  });
+  };
 };
 
 export default function App() {

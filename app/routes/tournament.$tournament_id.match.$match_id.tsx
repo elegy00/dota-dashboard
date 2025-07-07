@@ -1,6 +1,5 @@
-import type { LoaderFunctionArgs } from "@remix-run/node";
-import { json } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import type { LoaderFunctionArgs } from "react-router";
+import { useLoaderData } from "react-router";
 import { AggregationTable } from "~/components/molecules/AggregationTable";
 import { MatchService } from "~/services/matchService.server";
 import { matchToMatchAggregation } from "~/transformation/matchToMatchAggregation";
@@ -11,12 +10,11 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 
   const match = await MatchService.getMatchById(parseInt(matchId!));
 
-
   const aggregation = match && matchToMatchAggregation(match);
 
-  return json({
+  return {
     aggregation,
-  });
+  };
 };
 
 export default function MatchDetails() {

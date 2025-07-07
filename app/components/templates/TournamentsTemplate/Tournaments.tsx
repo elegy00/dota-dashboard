@@ -32,6 +32,7 @@ const TournamentsTemplate: React.FC<Props> = (props) => {
     [currentData]
   );
 
+  console.log(JSON.stringify(currentData));
   return (
     <main>
       <h1>Tournaments</h1>
@@ -42,7 +43,7 @@ const TournamentsTemplate: React.FC<Props> = (props) => {
       <ul className="space-y-2">
         {currentData.map((p) => (
           <li key={p._id} className="space-x-2 flex justify-between max-w-lg">
-            <Link to={`/tournament/${p._id}`}>{p.name}</Link>
+            <Link to={`/tournament/${p._id.toString()}`}>{p.name}</Link>
             <Button variant="secondary" onClick={deleteT(p)}>
               DELETE
             </Button>

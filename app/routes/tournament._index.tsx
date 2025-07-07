@@ -1,15 +1,14 @@
-import type { MetaFunction } from "@remix-run/node";
-import { json } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import type { MetaFunction } from "react-router";
+import { useLoaderData } from "react-router";
 import { TournamentsTemplate } from "~/components/templates/TournamentsTemplate";
 import { TournamentService } from "~/services/tournamentService.server";
 import { pageTitle } from "~/util/meta";
 
 export const loader = async () => {
   const tournaments = await TournamentService.getAllTournaments();
-  return json({
-    tournaments,
-  });
+  return {
+    tournaments: tournaments.map((t) => ({ ...t, _id: t._id.toString() })),
+  };
 };
 
 export const meta: MetaFunction = () => {

@@ -34,7 +34,6 @@ export function useAggregationTableSort(aggregation: Aggregation) {
     const entries = [...aggregation.entries].sort((a, b) => {
       const aVal = getValuesForEntry(a, sort);
       const bVal = getValuesForEntry(b, sort);
-      //   console.log()
       return (aVal - bVal) * (sort.sortDir === "asc" ? 1 : -1);
     });
     return { ...aggregation, entries };

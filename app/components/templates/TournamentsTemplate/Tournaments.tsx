@@ -32,7 +32,6 @@ const TournamentsTemplate: React.FC<Props> = (props) => {
     [currentData]
   );
 
-  console.log(JSON.stringify(currentData));
   return (
     <main>
       <h1>Tournaments</h1>

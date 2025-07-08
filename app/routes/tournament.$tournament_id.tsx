@@ -17,11 +17,13 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
   );
 
   if (id === undefined) {
-    throw new Error("tournament not found");
+    return { authorized: false };
   }
   return {
-    tournament,
-    matches,
+    tournament: tournament
+      ? { ...tournament, _id: tournament._id.toString() }
+      : null,
+    matches: matches.map((m) => ({ ...m, _id: m._id.toString() })),
   };
 };
 
@@ -40,10 +42,7 @@ const Tournament = () => {
     <main>
       <aside>
         {tournament && (
-          <TournamentNav
-            tournament={{ ...tournament, _id: tournament._id.toString() }}
-            matches={matches.map((m) => ({ ...m, _id: m._id.toString() }))}
-          />
+          <TournamentNav tournament={tournament} matches={matches} />
         )}
       </aside>
       <Outlet />

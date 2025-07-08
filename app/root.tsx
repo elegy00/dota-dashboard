@@ -10,7 +10,6 @@ export const links: LinksFunction = () => [{ rel: "stylesheet", href: styles }];
 
 const isAuthorized = (request: Request) => {
   const header = request.headers.get("Authorization");
-
   if (!header) return false;
 
   const base64 = header.replace("Basic ", "");
@@ -30,7 +29,12 @@ export const headers = () => ({
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   if (!isAuthorized(request)) {
-    throw new Response("Unauthorized");
+    throw new Response("Unauthorized", {
+      status: 401,
+      headers: {
+        "WWW-Authenticate": 'Basic realm="Dota Dashboard"',
+      },
+    });
   }
 
   // Load data for password-protected page here.

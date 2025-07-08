@@ -4,8 +4,6 @@ import type { Dto } from "~/types/base";
 import type { Match } from "~/types/opendota";
 import type { Tournament } from "~/types/tournament";
 import { matchSchema, type MatchFm } from "~/validation/matchSchema";
-import type { ActionRoute } from "../types";
-import type { MatchUrlParams } from "./types";
 import { MatchService } from "~/services/matchService.server";
 
 const onMatchAdded = async ({
@@ -26,6 +24,7 @@ const onMatchAdded = async ({
   }
 
   const match = (await res.json()) as Match;
+
   const tournament = await TournamentService.getTournamentById(id);
   const addedMatch = await MatchService.addMatch(match);
   if (tournament === null) {

@@ -10,7 +10,7 @@ const Link: React.FC<NavLinkProps> = (props) => {
           props.className,
           "underline underline-offset-4 duration-150 px-2 py-1 rounded",
           isActive
-            ? "text-green-700 font-semibold bg-green-300/75"
+            ? "text-green-700 bg-green-300/25"
             : "text-green-500 hover:text-green-600 bg-transparent",
         ].join(" ")
       }

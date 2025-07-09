@@ -1,5 +1,5 @@
-import type { MetaFunction } from "@remix-run/react";
-import { useNavigate } from "@remix-run/react";
+import type { MetaFunction } from "react-router";
+import { useNavigate } from "react-router";
 import { useCallback } from "react";
 import { tournamentsActionCaller } from "~/actions/tournaments/tournaments.index";
 import { TournamentForm } from "~/components/organism/TournamentForm/TournamentForm";

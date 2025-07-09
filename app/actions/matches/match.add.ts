@@ -1,4 +1,4 @@
-import type { ActionFunctionArgs } from "@remix-run/node";
+import type { ActionFunctionArgs } from "react-router";
 import { TournamentService } from "~/services/index.server";
 import type { Dto } from "~/types/base";
 import type { Match } from "~/types/opendota";

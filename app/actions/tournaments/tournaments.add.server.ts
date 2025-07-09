@@ -1,4 +1,4 @@
-import type { ActionFunctionArgs } from "@remix-run/node";
+import type { ActionFunctionArgs } from "react-router";
 import { TournamentService } from "~/services/index.server";
 import type { Tournament } from "~/types/tournament";
 import type { WithId } from "~/util/mongodb.server";

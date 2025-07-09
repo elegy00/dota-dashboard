@@ -1,4 +1,4 @@
-import { type MetaFunction } from "@remix-run/node";
+import { type MetaFunction } from "react-router";
 import { Link } from "~/components/atoms/Link";
 import { pageTitle } from "~/util/meta";
 

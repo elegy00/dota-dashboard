@@ -1,12 +1,5 @@
-import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
-import {
-  Links,
-  Meta,
-  Outlet,
-  Scripts,
-  ScrollRestoration,
-  json,
-} from "@remix-run/react";
+import type { LinksFunction, LoaderFunctionArgs } from "react-router";
+import { Links, Meta, Outlet, Scripts, ScrollRestoration } from "react-router";
 
 import { ColorContext, useColorThemeState } from "./state/colorContext";
 import { Layout } from "./components/organism/Layout";
@@ -17,7 +10,6 @@ export const links: LinksFunction = () => [{ rel: "stylesheet", href: styles }];
 
 const isAuthorized = (request: Request) => {
   const header = request.headers.get("Authorization");
-
   if (!header) return false;
 
   const base64 = header.replace("Basic ", "");
@@ -37,15 +29,20 @@ export const headers = () => ({
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   if (!isAuthorized(request)) {
-    return json({ authorized: false }, { status: 401 });
+    throw new Response("Unauthorized", {
+      status: 401,
+      headers: {
+        "WWW-Authenticate": 'Basic realm="Dota Dashboard"',
+      },
+    });
   }
 
   // Load data for password-protected page here.
 
-  return json({
+  return {
     authorized: true,
     // Include extra data for password-protected page here.
-  });
+  };
 };
 
 export default function App() {

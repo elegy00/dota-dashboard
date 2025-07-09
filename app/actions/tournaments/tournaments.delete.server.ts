@@ -1,4 +1,4 @@
-import type { ActionFunctionArgs } from "@remix-run/node";
+import type { ActionFunctionArgs } from "react-router";
 import { TournamentService } from "~/services/index.server";
 
 const onTournamentDelete = async ({ request }: ActionFunctionArgs) => {

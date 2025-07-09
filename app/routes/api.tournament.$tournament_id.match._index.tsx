@@ -1,4 +1,4 @@
-import type { ActionFunctionArgs } from "@remix-run/node"; // or cloudflare/deno
+import type { ActionFunctionArgs } from "react-router"; // or cloudflare/deno
 import { matchActionExecutor } from "~/actions/matches/match.index.server";
 import type { ActionMethod } from "~/actions/types";
 

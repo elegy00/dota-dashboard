@@ -1,7 +1,6 @@
-import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
-import { json } from "@remix-run/node";
-import type { ShouldRevalidateFunction } from "@remix-run/react";
-import { Outlet, useLoaderData } from "@remix-run/react";
+import type { LoaderFunctionArgs, MetaFunction } from "react-router";
+import type { ShouldRevalidateFunction } from "react-router";
+import { Outlet, useLoaderData } from "react-router";
 import { TournamentNav } from "~/components/templates/TournamentNav";
 import { TournamentService } from "~/services/index.server";
 import { MatchService } from "~/services/matchService.server";
@@ -18,12 +17,14 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
   );
 
   if (id === undefined) {
-    throw new Error("tournament not found");
+    return { authorized: false };
   }
-  return json({
-    tournament,
-    matches,
-  });
+  return {
+    tournament: tournament
+      ? { ...tournament, _id: tournament._id.toString() }
+      : null,
+    matches: matches.map((m) => ({ ...m, _id: m._id.toString() })),
+  };
 };
 
 export const shouldRevalidate: ShouldRevalidateFunction = ({ nextUrl }) => {

@@ -1,4 +1,4 @@
-import type { ActionFunctionArgs } from "@remix-run/node";
+import type { ActionFunctionArgs } from "react-router";
 import type { ActionMethod } from "../types";
 import type { MatchUrlParams } from "./types";
 import { onMatchDelete } from "./match.delete.server";

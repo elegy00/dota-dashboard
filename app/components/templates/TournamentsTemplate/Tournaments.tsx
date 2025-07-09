@@ -1,4 +1,5 @@
 import { useCallback, useState } from "react";
+import { Outlet } from "react-router";
 import { tournamentsActionCaller } from "~/actions/tournaments/tournaments.index";
 import { Button } from "~/components/atoms/Button";
 import { Link } from "~/components/atoms/Link";
@@ -34,21 +35,20 @@ const TournamentsTemplate: React.FC<Props> = (props) => {
 
   return (
     <main>
-      <h1>Tournaments</h1>
-
-      <Link to="/tournament/add" className="mt-4">
-        Create tournament
-      </Link>
-      <ul className="space-y-2">
+      <ul className="gap-2 flex">
         {currentData.map((p) => (
           <li key={p._id} className="space-x-2 flex justify-between max-w-lg">
-            <Link to={`/tournament/${p._id}`}>{p.name}</Link>
-            <Button variant="secondary" onClick={deleteT(p)}>
+            <Link to={`/tournament/${p._id.toString()}`}>{p.name}</Link>
+            {/* <Button variant="secondary" onClick={deleteT(p)}>
               DELETE
-            </Button>
+            </Button> */}
           </li>
         ))}
+        <li className="ml-auto">
+          <Link to="/tournament/add">Create tournament</Link>
+        </li>
       </ul>
+      <Outlet />
     </main>
   );
 };

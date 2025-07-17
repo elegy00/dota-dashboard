@@ -61,7 +61,7 @@ export default function App() {
         <body
           className={`${
             contextState.theme === "light" ? "light-mode" : "dark-mode"
-          } bg-grey-100 text-grey-900`}
+          } bg-gray-100 text-gray-900`}
           // style={{ backgroundColor: theme.grey[100] }}
         >
           <Layout>

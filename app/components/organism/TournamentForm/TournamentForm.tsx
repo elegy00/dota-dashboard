@@ -27,13 +27,13 @@ const TournamentForm = ({ onSubmit }: Props) => {
       <div className="w-full">
         <Input {...register("name")} type="text" className="w-full" />
         {errors.name && (
-          <p className="text-xs text-grey-700 mt-0">{errors.name.message}</p>
+          <p className="text-xs text-gray-700 mt-0">{errors.name.message}</p>
         )}
       </div>
       {/* <div className="w-full">
         <TextArea {...register("description")} className="w-full" />
         {errors.description && (
-          <p className="text-xs text-grey-700 mt-0">
+          <p className="text-xs text-gray-700 mt-0">
             {errors.description.message}
           </p>
         )}

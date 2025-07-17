@@ -9,7 +9,7 @@ const Layout: React.FC<PropsWithChildren<unknown>> = (props) => {
   return (
     <div>
       <header
-        className={`flex items-center justify-between border-b-2 border-grey-200 ${paddings}`}
+        className={`flex items-center justify-between border-b-2 border-gray-200 ${paddings}`}
       >
         <nav>
           <Link to="/">Home</Link>

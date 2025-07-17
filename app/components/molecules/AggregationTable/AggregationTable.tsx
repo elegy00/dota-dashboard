@@ -28,7 +28,7 @@ const AggregationTable: React.FC<Props> = (props) => {
 
   return (
     <div
-      className="grid child:p-2"
+      className="grid [&>*]:p-2"
       key={aggregation?.id}
       style={{
         gridTemplateColumns: `minmax(8rem,2fr) repeat(${

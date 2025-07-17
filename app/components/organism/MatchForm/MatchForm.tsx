@@ -41,7 +41,7 @@ const MatchForm = ({ onSubmit }: Props) => {
             className="w-full"
           />
           {errors.matchId && (
-            <p className="text-xs text-grey-700 mt-0">
+            <p className="text-xs text-gray-700 mt-0">
               {errors.matchId.message}
             </p>
           )}
@@ -49,7 +49,7 @@ const MatchForm = ({ onSubmit }: Props) => {
         {/* <div className="w-full">
         <TextArea {...register("description")} className="w-full" />
         {errors.description && (
-          <p className="text-xs text-grey-700 mt-0">
+          <p className="text-xs text-gray-700 mt-0">
             {errors.description.message}
           </p>
         )}
